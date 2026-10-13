@@ -1,0 +1,63 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "script": {
+      "5": {
+        "name": "email py2",
+        "display_name": null,
+        "tags": [],
+        "attributes": [
+          "PY2_CONVERTIBLE",
+          "PY2_UNICODE"
+        ]
+      },
+      "6": {
+        "name": "py2_script",
+        "display_name": null,
+        "tags": [],
+        "attributes": [
+          "PY2_CONVERTIBLE"
+        ]
+      }
+    },
+    "workflow": {
+      "5": {
+        "name": "py2 workflow",
+        "display_name": null,
+        "tags": [],
+        "attributes": [
+          "PY2_CONVERTIBLE"
+        ]
+      }
+    },
+    "playbook": {
+      "4": {
+        "name": "py2_3conditions",
+        "display_name": "Py2 3Conditions",
+        "tags": [],
+        "attributes": [
+          "PY2_CONVERTIBLE"
+        ]
+      }
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "py2_item_id": null,
+    "py2_item_type": null,
+    "py2_scripts_only": null,
+    "py2_search_tags": null,
+    "py2_workflows_only": null,
+    "py2_playbooks_only": null
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-search-for-py2",
+    "package_version": "1.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 3758,
+    "timestamp": "2025-04-04 12:25:17"
+  }
+}

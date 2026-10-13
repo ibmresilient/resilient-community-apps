@@ -1,0 +1,99 @@
+{
+  "version": 2,
+  "success": "True",
+  "reason": "None",
+  "content": [
+    {
+      "id": "3662ddfb-e952-4940-b84a-25bd3a894198",
+      "deletedDateTime": "None",
+      "classification": "None",
+      "createdDateTime": "2025-08-14T16:14:44Z",
+      "creationOptions": [],
+      "description": "Incident 3101: test fn_calc_add",
+      "displayName": "HydraGroupTest2",
+      "expirationDateTime": "None",
+      "groupTypes": [
+        "Unified"
+      ],
+      "isAssignableToRole": "None",
+      "mail": "demo_2@mscherflinggmail.onmicrosoft.com",
+      "mailEnabled": "True",
+      "mailNickname": "demo_2",
+      "membershipRule": "None",
+      "membershipRuleProcessingState": "None",
+      "onPremisesDomainName": "None",
+      "onPremisesLastSyncDateTime": "None",
+      "onPremisesNetBiosName": "None",
+      "onPremisesSamAccountName": "None",
+      "onPremisesSecurityIdentifier": "None",
+      "onPremisesSyncEnabled": "None",
+      "preferredDataLocation": "None",
+      "preferredLanguage": "None",
+      "proxyAddresses": [
+        "SMTP:demo_2@mscherflinggmail.onmicrosoft.com"
+      ],
+      "renewedDateTime": "2025-08-14T16:14:44Z",
+      "resourceBehaviorOptions": [],
+      "resourceProvisioningOptions": [],
+      "securityEnabled": "False",
+      "securityIdentifier": "S-1-12-1-912449019-1228990802-3173337784-2554431802",
+      "theme": "None",
+      "uniqueName": "None",
+      "visibility": "Private",
+      "onPremisesProvisioningErrors": [],
+      "serviceProvisioningErrors": []
+    },
+    {
+      "id": "d5cd1970-d799-45b5-b207-7278ec7591a0",
+      "deletedDateTime": "None",
+      "classification": "None",
+      "createdDateTime": "2025-08-14T11:29:20Z",
+      "creationOptions": [],
+      "description": "Incident 3101: test fn_calc_add Task: Investigate Exposure of Personal Information/Data",
+      "displayName": "HydraGroupTest1",
+      "expirationDateTime": "None",
+      "groupTypes": [
+        "Unified"
+      ],
+      "isAssignableToRole": "None",
+      "mail": "demogrouptask@mscherflinggmail.onmicrosoft.com",
+      "mailEnabled": "True",
+      "mailNickname": "demogrouptask",
+      "membershipRule": "None",
+      "membershipRuleProcessingState": "None",
+      "onPremisesDomainName": "None",
+      "onPremisesLastSyncDateTime": "None",
+      "onPremisesNetBiosName": "None",
+      "onPremisesSamAccountName": "None",
+      "onPremisesSecurityIdentifier": "None",
+      "onPremisesSyncEnabled": "None",
+      "preferredDataLocation": "None",
+      "preferredLanguage": "None",
+      "proxyAddresses": [
+        "SMTP:demogrouptask@mscherflinggmail.onmicrosoft.com"
+      ],
+      "renewedDateTime": "2025-08-14T11:29:20Z",
+      "resourceBehaviorOptions": [],
+      "resourceProvisioningOptions": [],
+      "securityEnabled": "False",
+      "securityIdentifier": "S-1-12-1-3586988400-1169545113-2020738994-2693887468",
+      "theme": "None",
+      "uniqueName": "None",
+      "visibility": "Private",
+      "onPremisesProvisioningErrors": [],
+      "serviceProvisioningErrors": []
+    }
+  ],
+  "raw": "None",
+  "inputs": {
+    "teams_filter": "None"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn_teams",
+    "package_version": "2.3.0",
+    "host": "localhost",
+    "execution_time_ms": 1175,
+    "timestamp": "2025-08-20 15:05:17"
+  }
+}

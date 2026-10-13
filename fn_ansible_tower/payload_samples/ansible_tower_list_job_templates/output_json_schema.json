@@ -1,0 +1,564 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "related": {
+            "type": "object",
+            "properties": {
+              "created_by": {
+                "type": "string"
+              },
+              "modified_by": {
+                "type": "string"
+              },
+              "labels": {
+                "type": "string"
+              },
+              "inventory": {
+                "type": "string"
+              },
+              "project": {
+                "type": "string"
+              },
+              "organization": {
+                "type": "string"
+              },
+              "credentials": {
+                "type": "string"
+              },
+              "last_job": {
+                "type": "string"
+              },
+              "jobs": {
+                "type": "string"
+              },
+              "schedules": {
+                "type": "string"
+              },
+              "activity_stream": {
+                "type": "string"
+              },
+              "launch": {
+                "type": "string"
+              },
+              "webhook_key": {
+                "type": "string"
+              },
+              "webhook_receiver": {
+                "type": "string"
+              },
+              "notification_templates_started": {
+                "type": "string"
+              },
+              "notification_templates_success": {
+                "type": "string"
+              },
+              "notification_templates_error": {
+                "type": "string"
+              },
+              "access_list": {
+                "type": "string"
+              },
+              "survey_spec": {
+                "type": "string"
+              },
+              "object_roles": {
+                "type": "string"
+              },
+              "instance_groups": {
+                "type": "string"
+              },
+              "slice_workflow_jobs": {
+                "type": "string"
+              },
+              "copy": {
+                "type": "string"
+              }
+            }
+          },
+          "summary_fields": {
+            "type": "object",
+            "properties": {
+              "organization": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              },
+              "inventory": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "has_active_failures": {
+                    "type": "boolean"
+                  },
+                  "total_hosts": {
+                    "type": "integer"
+                  },
+                  "hosts_with_active_failures": {
+                    "type": "integer"
+                  },
+                  "total_groups": {
+                    "type": "integer"
+                  },
+                  "has_inventory_sources": {
+                    "type": "boolean"
+                  },
+                  "total_inventory_sources": {
+                    "type": "integer"
+                  },
+                  "inventory_sources_with_failures": {
+                    "type": "integer"
+                  },
+                  "organization_id": {
+                    "type": "integer"
+                  },
+                  "kind": {
+                    "type": "string"
+                  }
+                }
+              },
+              "project": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "scm_type": {
+                    "type": "string"
+                  },
+                  "allow_override": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "last_job": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "finished": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "failed": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "last_update": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "failed": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "created_by": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "username": {
+                    "type": "string"
+                  },
+                  "first_name": {
+                    "type": "string"
+                  },
+                  "last_name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "modified_by": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "username": {
+                    "type": "string"
+                  },
+                  "first_name": {
+                    "type": "string"
+                  },
+                  "last_name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "object_roles": {
+                "type": "object",
+                "properties": {
+                  "admin_role": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "execute_role": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "read_role": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              },
+              "user_capabilities": {
+                "type": "object",
+                "properties": {
+                  "edit": {
+                    "type": "boolean"
+                  },
+                  "delete": {
+                    "type": "boolean"
+                  },
+                  "start": {
+                    "type": "boolean"
+                  },
+                  "schedule": {
+                    "type": "boolean"
+                  },
+                  "copy": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "labels": {
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "results": {
+                    "type": "array"
+                  }
+                }
+              },
+              "recent_jobs": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "finished": {
+                      "type": "string"
+                    },
+                    "canceled_on": {},
+                    "type": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "credentials": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "kind": {
+                      "type": "string"
+                    },
+                    "cloud": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "created": {
+            "type": "string"
+          },
+          "modified": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "job_type": {
+            "type": "string"
+          },
+          "inventory": {
+            "type": "integer"
+          },
+          "project": {
+            "type": "integer"
+          },
+          "playbook": {
+            "type": "string"
+          },
+          "scm_branch": {
+            "type": "string"
+          },
+          "forks": {
+            "type": "integer"
+          },
+          "limit": {
+            "type": "string"
+          },
+          "verbosity": {
+            "type": "integer"
+          },
+          "extra_vars": {
+            "type": "string"
+          },
+          "job_tags": {
+            "type": "string"
+          },
+          "force_handlers": {
+            "type": "boolean"
+          },
+          "skip_tags": {
+            "type": "string"
+          },
+          "start_at_task": {
+            "type": "string"
+          },
+          "timeout": {
+            "type": "integer"
+          },
+          "use_fact_cache": {
+            "type": "boolean"
+          },
+          "organization": {
+            "type": "integer"
+          },
+          "last_job_run": {
+            "type": "string"
+          },
+          "last_job_failed": {
+            "type": "boolean"
+          },
+          "next_job_run": {},
+          "status": {
+            "type": "string"
+          },
+          "execution_environment": {},
+          "host_config_key": {
+            "type": "string"
+          },
+          "ask_scm_branch_on_launch": {
+            "type": "boolean"
+          },
+          "ask_diff_mode_on_launch": {
+            "type": "boolean"
+          },
+          "ask_variables_on_launch": {
+            "type": "boolean"
+          },
+          "ask_limit_on_launch": {
+            "type": "boolean"
+          },
+          "ask_tags_on_launch": {
+            "type": "boolean"
+          },
+          "ask_skip_tags_on_launch": {
+            "type": "boolean"
+          },
+          "ask_job_type_on_launch": {
+            "type": "boolean"
+          },
+          "ask_verbosity_on_launch": {
+            "type": "boolean"
+          },
+          "ask_inventory_on_launch": {
+            "type": "boolean"
+          },
+          "ask_credential_on_launch": {
+            "type": "boolean"
+          },
+          "ask_execution_environment_on_launch": {
+            "type": "boolean"
+          },
+          "ask_labels_on_launch": {
+            "type": "boolean"
+          },
+          "ask_forks_on_launch": {
+            "type": "boolean"
+          },
+          "ask_job_slice_count_on_launch": {
+            "type": "boolean"
+          },
+          "ask_timeout_on_launch": {
+            "type": "boolean"
+          },
+          "ask_instance_groups_on_launch": {
+            "type": "boolean"
+          },
+          "survey_enabled": {
+            "type": "boolean"
+          },
+          "become_enabled": {
+            "type": "boolean"
+          },
+          "diff_mode": {
+            "type": "boolean"
+          },
+          "allow_simultaneous": {
+            "type": "boolean"
+          },
+          "custom_virtualenv": {},
+          "job_slice_count": {
+            "type": "integer"
+          },
+          "webhook_service": {
+            "type": "string"
+          },
+          "webhook_credential": {},
+          "prevent_instance_group_fallback": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "tower_template_pattern": {},
+        "tower_project": {}
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "success": "True",
+  "reason": "None",
+  "content": [
+    "114da827a1d0442b96f7039275b321e8",
+    "1acc0467837941db18401c6cd2e2287b",
+    "4face156778d48a3a06663dd461187ce",
+    "68e7855700034e989863db54335ae22b"
+  ],
+  "raw": "None",
+  "inputs": {
+    "aws_gd_max_results": 5,
+    "aws_gd_region": "us-east-1",
+    "aws_gd_next_token": "***",
+    "aws_gd_detector_id": "48bb********************b7ccbc82"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-aws-guardduty",
+    "package_version": "2.0.0",
+    "host": "localhost",
+    "execution_time_ms": 1080,
+    "timestamp": "2025-07-18 14:54:25"
+  }
+}

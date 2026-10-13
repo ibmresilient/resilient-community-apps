@@ -1,0 +1,120 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "jobId": {
+              "type": "string"
+            },
+            "creationTime": {
+              "type": "string"
+            },
+            "provisioningState": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "statusDetails": {
+              "type": "string"
+            },
+            "startedBy": {
+              "type": "string"
+            },
+            "startTime": {
+              "type": "string"
+            },
+            "endTime": {
+              "type": "string"
+            },
+            "lastModifiedTime": {
+              "type": "string"
+            },
+            "lastStatusModifiedTime": {
+              "type": "string"
+            },
+            "exception": {},
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "runbook_name": {
+                  "type": "string"
+                }
+              }
+            },
+            "runOn": {
+              "type": "string"
+            },
+            "runbook": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "job_name": {
+          "type": "string"
+        },
+        "account_name": {
+          "type": "string"
+        },
+        "resource_group_name": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+    '@odata.context': 'https://api.securitycenter.microsoft.com/api/$metadata#Indicators/$entity',
+    'id': '1',
+    'indicatorValue': '198.51.100.0',
+    'indicatorType': 'IpAddress',
+    'action': 'AlertAndBlock',
+    'createdBy': '211596a5-5a56-43f6-8347-97937364677b',
+    'severity': 'Informational',
+    'category': None,
+    'application': None,
+    'educateUrl': None,
+    'bypassDurationHours': None,
+    'title': 'something',
+    'description': 'description',
+    'recommendedActions': None,
+    'creationTimeDateTimeUtc': '2021-01-06T00:59:41.3766788Z',
+    'expirationTime': None,
+    'lastUpdateTime': '2021-01-06T00:59:41.3841474Z',
+    'lastUpdatedBy': None,
+    'rbacGroupNames': [
+      
+    ],
+    'rbacGroupIds': [
+      
+    ],
+    'notificationId': None,
+    'notificationBody': None,
+    'version': None,
+    'mitreTechniques': [
+      
+    ],
+    'historicalDetection': False,
+    'lookBackPeriod': None,
+    'generateAlert': False,
+    'additionalInfo': None,
+    'createdByDisplayName': 'defender',
+    'externalId': None,
+    'createdBySource': 'PublicApi',
+    'certificateInfo': None
+  }

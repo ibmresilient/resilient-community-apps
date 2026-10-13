@@ -1,0 +1,1007 @@
+{
+  "response": {
+    "plus_code": {
+      "compound_code": "9VWH+4CG Somerville, MA, USA",
+      "global_code": "87JC9VWH+4CG"
+    },
+    "results": [
+      {
+        "address_components": [
+          {
+            "long_name": "243",
+            "short_name": "243",
+            "types": [
+              "street_number"
+            ]
+          },
+          {
+            "long_name": "Elm Street",
+            "short_name": "Elm St",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "Davis Square",
+            "short_name": "Davis Square",
+            "types": [
+              "neighborhood",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Somerville",
+            "short_name": "Somerville",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Middlesex County",
+            "short_name": "Middlesex County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Massachusetts",
+            "short_name": "MA",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "02144",
+            "short_name": "02144",
+            "types": [
+              "postal_code"
+            ]
+          },
+          {
+            "long_name": "2934",
+            "short_name": "2934",
+            "types": [
+              "postal_code_suffix"
+            ]
+          }
+        ],
+        "formatted_address": "243 Elm St, Somerville, MA 02144, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 42.3953643,
+              "lng": -71.12145699999999
+            },
+            "southwest": {
+              "lat": 42.3952205,
+              "lng": -71.1217045
+            }
+          },
+          "location": {
+            "lat": 42.3952882,
+            "lng": -71.1216188
+          },
+          "location_type": "ROOFTOP",
+          "viewport": {
+            "northeast": {
+              "lat": 42.3966413802915,
+              "lng": -71.1202317697085
+            },
+            "southwest": {
+              "lat": 42.3939434197085,
+              "lng": -71.1229297302915
+            }
+          }
+        },
+        "navigation_points": [
+          {
+            "location": {
+              "latitude": 42.3952427,
+              "longitude": -71.1217017
+            }
+          }
+        ],
+        "place_id": "****k7FFohh344kR5ucMhQgMoT4",
+        "types": [
+          "street_address",
+          "subpremise"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "241",
+            "short_name": "241",
+            "types": [
+              "street_number"
+            ]
+          },
+          {
+            "long_name": "Elm Street",
+            "short_name": "Elm St",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "Davis Square",
+            "short_name": "Davis Square",
+            "types": [
+              "neighborhood",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Somerville",
+            "short_name": "Somerville",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Middlesex County",
+            "short_name": "Middlesex County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Massachusetts",
+            "short_name": "MA",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "02144",
+            "short_name": "02144",
+            "types": [
+              "postal_code"
+            ]
+          },
+          {
+            "long_name": "2934",
+            "short_name": "2934",
+            "types": [
+              "postal_code_suffix"
+            ]
+          }
+        ],
+        "formatted_address": "241 Elm St, Somerville, MA 02144, USA",
+        "geometry": {
+          "location": {
+            "lat": 42.3952803,
+            "lng": -71.12157239999999
+          },
+          "location_type": "ROOFTOP",
+          "viewport": {
+            "northeast": {
+              "lat": 42.3966292802915,
+              "lng": -71.12022341970848
+            },
+            "southwest": {
+              "lat": 42.3939313197085,
+              "lng": -71.1229213802915
+            }
+          }
+        },
+        "navigation_points": [
+          {
+            "location": {
+              "latitude": 42.39519,
+              "longitude": -71.1216663
+            }
+          }
+        ],
+        "place_id": "****T3VBohh344kRpjyg7MtlCzw",
+        "types": [
+          "premise",
+          "street_address"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "243",
+            "short_name": "243",
+            "types": [
+              "street_number"
+            ]
+          },
+          {
+            "long_name": "Elm Street",
+            "short_name": "Elm St",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "Davis Square",
+            "short_name": "Davis Square",
+            "types": [
+              "neighborhood",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Somerville",
+            "short_name": "Somerville",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Middlesex County",
+            "short_name": "Middlesex County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Massachusetts",
+            "short_name": "MA",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "02144",
+            "short_name": "02144",
+            "types": [
+              "postal_code"
+            ]
+          }
+        ],
+        "formatted_address": "243 Elm St, Somerville, MA 02144, USA",
+        "geometry": {
+          "location": {
+            "lat": 42.3952882,
+            "lng": -71.1216188
+          },
+          "location_type": "ROOFTOP",
+          "viewport": {
+            "northeast": {
+              "lat": 42.3966371802915,
+              "lng": -71.1202698197085
+            },
+            "southwest": {
+              "lat": 42.3939392197085,
+              "lng": -71.1229677802915
+            }
+          }
+        },
+        "navigation_points": [
+          {
+            "location": {
+              "latitude": 42.3949065,
+              "longitude": -71.1215183
+            }
+          }
+        ],
+        "place_id": "****r9rKnhh344kRK08Akv-bsfU",
+        "plus_code": {
+          "compound_code": "9VWH+49 Somerville, MA, USA",
+          "global_code": "87JC9VWH+49"
+        },
+        "types": [
+          "establishment",
+          "food",
+          "point_of_interest",
+          "restaurant"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "242",
+            "short_name": "242",
+            "types": [
+              "street_number"
+            ]
+          },
+          {
+            "long_name": "Elm Street",
+            "short_name": "Elm St",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "Davis Square",
+            "short_name": "Davis Square",
+            "types": [
+              "neighborhood",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Somerville",
+            "short_name": "Somerville",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Middlesex County",
+            "short_name": "Middlesex County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Massachusetts",
+            "short_name": "MA",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "02144",
+            "short_name": "02144",
+            "types": [
+              "postal_code"
+            ]
+          },
+          {
+            "long_name": "2935",
+            "short_name": "2935",
+            "types": [
+              "postal_code_suffix"
+            ]
+          }
+        ],
+        "formatted_address": "242 Elm St, Somerville, MA 02144, USA",
+        "geometry": {
+          "location": {
+            "lat": 42.3951979,
+            "lng": -71.1217668
+          },
+          "location_type": "RANGE_INTERPOLATED",
+          "viewport": {
+            "northeast": {
+              "lat": 42.3965468802915,
+              "lng": -71.1204178197085
+            },
+            "southwest": {
+              "lat": 42.3938489197085,
+              "lng": -71.12311578029151
+            }
+          }
+        },
+        "place_id": "****NDIgRWxtIFN0LCBTb21lcnZpbGxlLCBNQSAwMjE0NCwgVVNBIhsSGQoUChIJYz6smRh344kRDFdGTS9hu9AQ8gE",
+        "types": [
+          "street_address"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "9VWH+4C",
+            "short_name": "9VWH+4C",
+            "types": [
+              "plus_code"
+            ]
+          },
+          {
+            "long_name": "Somerville",
+            "short_name": "Somerville",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Middlesex County",
+            "short_name": "Middlesex County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Massachusetts",
+            "short_name": "MA",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          }
+        ],
+        "formatted_address": "9VWH+4C Somerville, MA, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 42.395375,
+              "lng": -71.12137500000001
+            },
+            "southwest": {
+              "lat": 42.39525,
+              "lng": -71.1215
+            }
+          },
+          "location": {
+            "lat": 42.3953171,
+            "lng": -71.1214282
+          },
+          "location_type": "GEOMETRIC_CENTER",
+          "viewport": {
+            "northeast": {
+              "lat": 42.3966614802915,
+              "lng": -71.12008851970849
+            },
+            "southwest": {
+              "lat": 42.3939635197085,
+              "lng": -71.12278648029151
+            }
+          }
+        },
+        "place_id": "****WAYwwJkyRUAR-vPIesXHUcA",
+        "plus_code": {
+          "compound_code": "9VWH+4C Somerville, MA, USA",
+          "global_code": "87JC9VWH+4C"
+        },
+        "types": [
+          "plus_code"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "244-240",
+            "short_name": "244-240",
+            "types": [
+              "street_number"
+            ]
+          },
+          {
+            "long_name": "Elm Street",
+            "short_name": "Elm St",
+            "types": [
+              "route"
+            ]
+          },
+          {
+            "long_name": "Davis Square",
+            "short_name": "Davis Square",
+            "types": [
+              "neighborhood",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Somerville",
+            "short_name": "Somerville",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Middlesex County",
+            "short_name": "Middlesex County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Massachusetts",
+            "short_name": "MA",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          },
+          {
+            "long_name": "02144",
+            "short_name": "02144",
+            "types": [
+              "postal_code"
+            ]
+          },
+          {
+            "long_name": "2935",
+            "short_name": "2935",
+            "types": [
+              "postal_code_suffix"
+            ]
+          }
+        ],
+        "formatted_address": "244-240 Elm St, Somerville, MA 02144, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 42.3953471,
+              "lng": -71.1217104
+            },
+            "southwest": {
+              "lat": 42.395114,
+              "lng": -71.1218672
+            }
+          },
+          "location": {
+            "lat": 42.3952306,
+            "lng": -71.12178879999999
+          },
+          "location_type": "GEOMETRIC_CENTER",
+          "viewport": {
+            "northeast": {
+              "lat": 42.3965795302915,
+              "lng": -71.12043981970851
+            },
+            "southwest": {
+              "lat": 42.3938815697085,
+              "lng": -71.12313778029151
+            }
+          }
+        },
+        "place_id": "****Yz6smRh344kRDFdGTS9hu9A",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "Davis Square",
+            "short_name": "Davis Square",
+            "types": [
+              "neighborhood",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Somerville",
+            "short_name": "Somerville",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Middlesex County",
+            "short_name": "Middlesex County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Massachusetts",
+            "short_name": "MA",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          }
+        ],
+        "formatted_address": "Davis Square, Somerville, MA, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 42.3998219,
+              "lng": -71.1168818
+            },
+            "southwest": {
+              "lat": 42.391296,
+              "lng": -71.127597
+            }
+          },
+          "location": {
+            "lat": 42.3967172,
+            "lng": -71.1223151
+          },
+          "location_type": "APPROXIMATE",
+          "viewport": {
+            "northeast": {
+              "lat": 42.3998219,
+              "lng": -71.1168818
+            },
+            "southwest": {
+              "lat": 42.391296,
+              "lng": -71.127597
+            }
+          }
+        },
+        "place_id": "****V1wE6Bh344kRUrVbHX8CkaM",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "02144",
+            "short_name": "02144",
+            "types": [
+              "postal_code"
+            ]
+          },
+          {
+            "long_name": "West Somerville",
+            "short_name": "West Somerville",
+            "types": [
+              "neighborhood",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Somerville",
+            "short_name": "Somerville",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Middlesex County",
+            "short_name": "Middlesex County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Massachusetts",
+            "short_name": "MA",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          }
+        ],
+        "formatted_address": "West Somerville, MA 02144, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 42.418112,
+              "lng": -71.10402189999999
+            },
+            "southwest": {
+              "lat": 42.388034,
+              "lng": -71.135403
+            }
+          },
+          "location": {
+            "lat": 42.3991718,
+            "lng": -71.1240559
+          },
+          "location_type": "APPROXIMATE",
+          "viewport": {
+            "northeast": {
+              "lat": 42.418112,
+              "lng": -71.10402189999999
+            },
+            "southwest": {
+              "lat": 42.388034,
+              "lng": -71.135403
+            }
+          }
+        },
+        "place_id": "****83x-qt9244kRfiKFU_1K9eA",
+        "postcode_localities": [
+          "Somerville",
+          "West Somerville"
+        ],
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "Somerville",
+            "short_name": "Somerville",
+            "types": [
+              "locality",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Middlesex County",
+            "short_name": "Middlesex County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Massachusetts",
+            "short_name": "MA",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          }
+        ],
+        "formatted_address": "Somerville, MA, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 42.4181351,
+              "lng": -71.072689
+            },
+            "southwest": {
+              "lat": 42.37252609999999,
+              "lng": -71.1346351
+            }
+          },
+          "location": {
+            "lat": 42.3875968,
+            "lng": -71.0994968
+          },
+          "location_type": "APPROXIMATE",
+          "viewport": {
+            "northeast": {
+              "lat": 42.4181351,
+              "lng": -71.072689
+            },
+            "southwest": {
+              "lat": 42.37252609999999,
+              "lng": -71.1346351
+            }
+          }
+        },
+        "place_id": "****ZeH1eyl344kRA3v52Jl3kHo",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "Middlesex County",
+            "short_name": "Middlesex County",
+            "types": [
+              "administrative_area_level_2",
+              "political"
+            ]
+          },
+          {
+            "long_name": "Massachusetts",
+            "short_name": "MA",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          }
+        ],
+        "formatted_address": "Middlesex County, MA, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 42.7365541,
+              "lng": -71.020377
+            },
+            "southwest": {
+              "lat": 42.1567819,
+              "lng": -71.89877299999999
+            }
+          },
+          "location": {
+            "lat": 42.467206,
+            "lng": -71.2874209
+          },
+          "location_type": "APPROXIMATE",
+          "viewport": {
+            "northeast": {
+              "lat": 42.7365541,
+              "lng": -71.020377
+            },
+            "southwest": {
+              "lat": 42.1567819,
+              "lng": -71.89877299999999
+            }
+          }
+        },
+        "navigation_points": [
+          {
+            "location": {
+              "latitude": 42.4658094,
+              "longitude": -71.2888888
+            }
+          }
+        ],
+        "place_id": "****mQwtQe4L5IkRCLDyk1MVcOI",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "Massachusetts",
+            "short_name": "MA",
+            "types": [
+              "administrative_area_level_1",
+              "political"
+            ]
+          },
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          }
+        ],
+        "formatted_address": "Massachusetts, USA",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 42.886778,
+              "lng": -69.85886099999999
+            },
+            "southwest": {
+              "lat": 41.18705300000001,
+              "lng": -73.5082101
+            }
+          },
+          "location": {
+            "lat": 42.4072107,
+            "lng": -71.3824374
+          },
+          "location_type": "APPROXIMATE",
+          "viewport": {
+            "northeast": {
+              "lat": 42.886778,
+              "lng": -69.85886099999999
+            },
+            "southwest": {
+              "lat": 41.18705300000001,
+              "lng": -73.5082101
+            }
+          }
+        },
+        "place_id": "****_b9z6W1l44kRHA2DVTbQxkU",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "address_components": [
+          {
+            "long_name": "United States",
+            "short_name": "US",
+            "types": [
+              "country",
+              "political"
+            ]
+          }
+        ],
+        "formatted_address": "United States",
+        "geometry": {
+          "bounds": {
+            "northeast": {
+              "lat": 74.071038,
+              "lng": -66.885417
+            },
+            "southwest": {
+              "lat": 18.7763,
+              "lng": 166.9999999
+            }
+          },
+          "location": {
+            "lat": 38.7945952,
+            "lng": -106.5348379
+          },
+          "location_type": "APPROXIMATE",
+          "viewport": {
+            "northeast": {
+              "lat": 74.071038,
+              "lng": -66.885417
+            },
+            "southwest": {
+              "lat": 18.7763,
+              "lng": 166.9999999
+            }
+          }
+        },
+        "place_id": "****CzYy5IS16lQRQrfeQ5K5Oxw",
+        "types": [
+          "country",
+          "political"
+        ]
+      }
+    ],
+    "status": "OK"
+  },
+  "status": true
+}

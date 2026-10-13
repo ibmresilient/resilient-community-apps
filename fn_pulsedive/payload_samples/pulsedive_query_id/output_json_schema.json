@@ -1,0 +1,407 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "resp_json": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean"
+        },
+        "reason": {},
+        "content": {
+          "type": "object",
+          "properties": {
+            "qid": {},
+            "iid": {
+              "type": "integer"
+            },
+            "indicator": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "risk": {
+              "type": "string"
+            },
+            "risk_recommended": {
+              "type": "string"
+            },
+            "manualrisk": {
+              "type": "integer"
+            },
+            "retired": {},
+            "stamp_added": {
+              "type": "string"
+            },
+            "stamp_updated": {
+              "type": "string"
+            },
+            "stamp_seen": {
+              "type": "string"
+            },
+            "stamp_probed": {
+              "type": "string"
+            },
+            "stamp_retired": {},
+            "recent": {
+              "type": "integer"
+            },
+            "submissions": {
+              "type": "integer"
+            },
+            "umbrella_rank": {},
+            "umbrella_domain": {},
+            "riskfactors": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rfid": {
+                    "type": "integer"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "risk": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "redirects": {
+              "type": "object",
+              "properties": {
+                "from": {
+                  "type": "array"
+                },
+                "to": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "iid": {
+                        "type": "integer"
+                      },
+                      "indicator": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "threats": {
+              "type": "array"
+            },
+            "feeds": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "fid": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "organization": {
+                    "type": "string"
+                  },
+                  "pricing": {
+                    "type": "string"
+                  },
+                  "stamp_linked": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "comments": {
+              "type": "array"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "hosttype": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "port": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "protocol": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "technology": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "http": {
+                  "type": "object",
+                  "properties": {
+                    "server": {
+                      "type": "string"
+                    },
+                    "content-type": {
+                      "type": "string"
+                    },
+                    "content-length": {
+                      "type": "string"
+                    },
+                    "++code": {
+                      "type": "string"
+                    },
+                    "++content-type": {
+                      "type": "string"
+                    },
+                    "++redirect": {
+                      "type": "string"
+                    },
+                    "++target": {
+                      "type": "string"
+                    },
+                    "date": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "ssl": {
+                  "type": "object",
+                  "properties": {
+                    "domain": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "version": {
+                      "type": "string"
+                    },
+                    "issuer": {
+                      "type": "string"
+                    },
+                    "org": {
+                      "type": "string"
+                    },
+                    "expires": {
+                      "type": "string"
+                    },
+                    "valid": {
+                      "type": "string"
+                    },
+                    "subject": {
+                      "type": "string"
+                    },
+                    "fingerprint": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "whois": {
+                  "type": "object",
+                  "properties": {
+                    "registrar url": {
+                      "type": "string"
+                    },
+                    "registrar name": {
+                      "type": "string"
+                    },
+                    "++registrant": {
+                      "type": "string"
+                    },
+                    "domain name": {
+                      "type": "string"
+                    },
+                    "creation date": {
+                      "type": "string"
+                    },
+                    "registrant name": {
+                      "type": "string"
+                    },
+                    "name server": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "expiration date": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "dns": {
+                  "type": "object",
+                  "properties": {
+                    "mx": {
+                      "type": "string"
+                    },
+                    "rname": {
+                      "type": "string"
+                    },
+                    "a": {
+                      "type": "string"
+                    },
+                    "ns": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "txt": {
+                      "type": "string"
+                    },
+                    "mname": {
+                      "type": "string"
+                    },
+                    "soa": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "++title": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "banners": {
+                  "type": "object",
+                  "properties": {
+                    "143": {
+                      "type": "string"
+                    },
+                    "21": {
+                      "type": "string"
+                    },
+                    "993": {
+                      "type": "string"
+                    },
+                    "465": {
+                      "type": "string"
+                    },
+                    "53": {
+                      "type": "string"
+                    },
+                    "25": {
+                      "type": "string"
+                    },
+                    "3306": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "dom": {
+                  "type": "object",
+                  "properties": {
+                    "screenshot": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "raw": {
+          "type": "string"
+        },
+        "inputs": {
+          "type": "object",
+          "properties": {
+            "incident_id": {
+              "type": "integer"
+            },
+            "pulsedive_id": {
+              "type": "integer"
+            },
+            "pulsedive_query_type": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            },
+            "attachment_name": {},
+            "pulsedive_id_report_type": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            },
+            "pulsedive_pretty": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "metrics": {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string"
+            },
+            "package": {
+              "type": "string"
+            },
+            "package_version": {
+              "type": "string"
+            },
+            "host": {
+              "type": "string"
+            },
+            "execution_time_ms": {
+              "type": "integer"
+            },
+            "timestamp": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "att_name": {
+      "type": "string"
+    }
+  }
+}

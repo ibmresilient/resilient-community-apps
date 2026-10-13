@@ -1,0 +1,25 @@
+{
+    {# JINJA template for updating a new Sentinel incident from a SOAR incident. #}
+    "properties": {
+        "title": "{{ name|soar_splitpart(1)|replace('"', '\\"') }}",
+        "severity": "{{ severity_code|string|soar_substitute('{"Low": "Low", "Medium": "Medium", "High": "High"}') }}",
+        "status": "{{ properties.sentinel_incident_status }}"
+        {% if description %}
+            ,"description": "{{ description|replace('"', '\\"')|striptags|safe }}"
+        {% endif %}
+        {% if properties.sentinel_incident_labels %}
+            {% set label_list = properties.sentinel_incident_labels.split(',') -%}
+            ,"labels": [
+            {% for label in label_list %}
+                {% if label %}
+                {
+                    "labelName": {{ label | trim | json }},
+                    "labelType": "User"
+                }
+                {% endif %}
+            {% if not loop.last %},{% endif %}
+            {% endfor %}
+            ]
+        {% endif %}
+    }
+}

@@ -1,0 +1,5 @@
+{
+        "plan_status": "C",
+        "resolution_id": "Resolved",
+        "resolution_summary": "Resolved by Resilient integration AWS GuardDuty poller because corresponding GuardDuty finding has been Archived."
+}

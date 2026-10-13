@@ -1,0 +1,39 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "domain_volume": {
+      "dates": [
+        1729450800000,
+        1729450800000
+      ],
+      "queries": [
+        280833
+      ],
+      "dates_converted": [
+        "2024-10-20 15:00:00",
+        "2024-10-20 15:00:00"
+      ]
+    },
+    "domain_name": "ibm.com",
+    "query_execution_time": "2024-11-19 10:04:45"
+  },
+  "raw": null,
+  "inputs": {
+    "umbinv_stop_relative": "now",
+    "umbinv_match": "all",
+    "umbinv_start_epoch": null,
+    "umbinv_stop_epoch": null,
+    "umbinv_domain": "ibm.com",
+    "umbinv_start_relative": "-1days"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-cisco-umbrella-inv",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 547,
+    "timestamp": "2024-11-19 10:04:45"
+  }
+}

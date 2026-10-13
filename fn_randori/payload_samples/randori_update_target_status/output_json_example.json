@@ -1,0 +1,22 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "count": 1
+  },
+  "raw": null,
+  "inputs": {
+    "randori_target_status": "Accepted",
+    "randori_note": "<div class=\"rte\"><div>marking as resolved from SOAR</div></div>",
+    "randori_target_id": "5dbcb688-8591-4574-ad18-6cbc27a1941c"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-randori",
+    "package_version": "1.0.0",
+    "host": "MacBook-Pro.local",
+    "execution_time_ms": 704,
+    "timestamp": "2022-11-07 13:14:30"
+  }
+}

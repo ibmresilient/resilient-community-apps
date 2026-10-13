@@ -1,0 +1,55 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": 14374209,
+    "type": "user_workflow_update",
+    "job_parameters": {
+      "job_parameters": {
+        "request": {
+          "criteria": {
+            "id": [
+              "35081d68-29d0-7592-f408-33939ed01882"
+            ]
+          },
+          "determination": "TRUE_POSITIVE",
+          "status": "IN_PROGRESS"
+        },
+        "userWorkflowDto": {
+          "change_timestamp": "2024-05-29T15:09:30.461Z",
+          "changed_by_type": "API",
+          "changed_by": "FRZADN2KIK",
+          "closure_reason": "NO_REASON",
+          "status": "IN_PROGRESS"
+        }
+      }
+    },
+    "connector_id": "FRIYZADN2K",
+    "org_key": "7M9FP6WE",
+    "status": "COMPLETED",
+    "progress": {
+      "num_total": 1,
+      "num_completed": 1,
+      "message": "Dismissal completed"
+    },
+    "create_time": "2024-05-29T15:09:30.535479Z",
+    "last_update_time": "2024-05-29T15:09:31.340546Z"
+  },
+  "raw": null,
+  "inputs": {
+    "vmware_cbc_status": "IN_PROGRESS",
+    "vmware_cbc_determination": "TRUE_POSITIVE",
+    "vmware_cbc_closure_reason": null,
+    "vmware_cbc_alert_id": "35081d68-29d0-7592-f408-33939ed01882",
+    "vmware_cbc_note_text": null
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-vmware-cbc",
+    "package_version": "1.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 1599,
+    "timestamp": "2024-05-29 11:09:31"
+  }
+}

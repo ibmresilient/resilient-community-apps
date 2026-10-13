@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "mail_body": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "mail_to": {
+          "type": "string"
+        },
+        "mail_incident_id": {
+          "type": "integer"
+        },
+        "mail_attachments": {
+          "type": "string"
+        },
+        "mail_subject": {
+          "type": "string"
+        },
+        "mail_importance": {
+          "type": "string"
+        },
+        "mail_from": {
+          "type": "string"
+        },
+        "mail_inline_template": {
+          "type": "string"
+        },
+        "mail_cc": {}
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

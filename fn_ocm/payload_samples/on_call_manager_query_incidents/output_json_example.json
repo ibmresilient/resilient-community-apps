@@ -1,0 +1,72 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "state": "unassigned",
+      "summary": "Application: SAMPLE - Online Sales",
+      "description": "Application: SAMPLE - Online Sales",
+      "owner": "-",
+      "team": "-",
+      "closedOwner": "-",
+      "closedTeam": "-",
+      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "displayId": "0000-32m1",
+      "createdTime": "2025-07-08T15:00:37.538Z",
+      "lastChanged": "2025-07-08T15:00:49.937Z",
+      "firstInProgressTime": "-",
+      "resolvedTime": "-",
+      "priority": 2,
+      "escalated": false,
+      "wasEscalated": false,
+      "correlationDetails": {
+        "application": "SAMPLE - Online Sales"
+      },
+      "accessScopes": [],
+      "incidentURL": "https://oncallmanager.ibm.com/api/incidentquery/v1/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "eventsURL": "https://oncallmanager.ibm.com/api/incidentquery/v1/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/events",
+      "timelineURL": "https://oncallmanager.ibm.com/api/incidentquery/v1/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/timeline"
+    },
+    {
+      "state": "unassigned",
+      "summary": "Application: SAMPLE - Online Banking",
+      "description": "Application: SAMPLE - Online Banking",
+      "owner": "-",
+      "team": "-",
+      "closedOwner": "-",
+      "closedTeam": "-",
+      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "displayId": "0000-31m1",
+      "createdTime": "2025-07-08T15:00:30.658Z",
+      "lastChanged": "2025-07-08T15:00:54.943Z",
+      "firstInProgressTime": "-",
+      "resolvedTime": "-",
+      "priority": 2,
+      "escalated": false,
+      "wasEscalated": false,
+      "correlationDetails": {
+        "application": "SAMPLE - Online Banking"
+      },
+      "accessScopes": [],
+      "incidentURL": "https://oncallmanager.ibm.com/api/incidentquery/v1/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "eventsURL": "https://oncallmanager.ibm.com/api/incidentquery/v1/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/events",
+      "timelineURL": "https://oncallmanager.ibm.com/api/incidentquery/v1/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/timeline"
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "ocm_endtime": 1752033600000,
+    "ocm_event_combiner": "and",
+    "ocm_starttime": 1751860800000,
+    "ocm_event_filter_1": "severity >= \"minor\""
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ocm",
+    "package_version": "1.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 592,
+    "timestamp": "2025-07-08 11:11:46"
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "resp_json": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean"
+        },
+        "reason": {},
+        "content": {
+          "type": "object",
+          "properties": {
+            "results": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "fid": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "organization": {
+                    "type": "string"
+                  },
+                  "pricing": {
+                    "type": "string"
+                  },
+                  "schedule": {
+                    "type": "string"
+                  },
+                  "stamp_updated": {
+                    "type": "string"
+                  },
+                  "stamp_pulled": {
+                    "type": "string"
+                  },
+                  "stamp_modified": {
+                    "type": "string"
+                  },
+                  "indicators": {
+                    "type": "object",
+                    "properties": {
+                      "critical": {
+                        "type": "integer"
+                      },
+                      "low": {
+                        "type": "integer"
+                      },
+                      "none": {
+                        "type": "integer"
+                      },
+                      "retired": {
+                        "type": "integer"
+                      },
+                      "medium": {
+                        "type": "integer"
+                      },
+                      "unknown": {
+                        "type": "integer"
+                      },
+                      "high": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "raw": {
+          "type": "string"
+        },
+        "inputs": {
+          "type": "object",
+          "properties": {
+            "pulsedive_search_type": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            },
+            "pulsedive_indicator_type": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "pulsedive_limit": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            },
+            "attachment_name": {},
+            "pulsedive_splitrisk": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            },
+            "pulsedive_threat": {},
+            "pulsedive_risk": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "incident_id": {
+              "type": "integer"
+            },
+            "pulsedive_attribute": {},
+            "pulsedive_lastseen": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            },
+            "pulsedive_property": {},
+            "pulsedive_category": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "pulsedive_search_value": {
+              "type": "string"
+            },
+            "pulsedive_feed": {},
+            "pulsedive_pretty": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "metrics": {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string"
+            },
+            "package": {
+              "type": "string"
+            },
+            "package_version": {
+              "type": "string"
+            },
+            "host": {
+              "type": "string"
+            },
+            "execution_time_ms": {
+              "type": "integer"
+            },
+            "timestamp": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "att_name": {
+      "type": "string"
+    }
+  }
+}

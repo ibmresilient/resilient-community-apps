@@ -1,0 +1,65 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "name": "Saperix Corporate",
+      "industry": "Technology",
+      "industry_slug": "technology",
+      "primary_domain": "saperix.com",
+      "description": "Saperix Technologies LLC develops risk analysis software solutions.",
+      "website": "http://saperix.com/corporate"
+    },
+    {
+      "guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "name": "Saperix, Inc.",
+      "industry": "Technology",
+      "industry_slug": "technology",
+      "primary_domain": "saperix.com",
+      "description": "Saperix Technologies LLC develops risk analysis software solutions.",
+      "website": "http://www.saperix.com"
+    },
+    {
+      "guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "name": "Saperix, LAB AWS",
+      "industry": "Technology",
+      "industry_slug": "technology",
+      "primary_domain": "saperix.com",
+      "description": "This is a self-published break-out entity, which is used for grouping a portion of a company's internet assets together into a rating report.",
+      "website": "http://saperix.com"
+    },
+    {
+      "guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "name": "Saperix Corporate - US West",
+      "industry": "Technology",
+      "industry_slug": "technology",
+      "primary_domain": "saperix.com",
+      "description": "Saperix Technologies LLC develops risk analysis software solutions.",
+      "website": "http://saperix.com/corpwest"
+    },
+    {
+      "guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "name": "Saperix Corporate - US East",
+      "industry": "Technology",
+      "industry_slug": "technology",
+      "primary_domain": "saperix.com",
+      "description": "Saperix Technologies LLC develops risk analysis software solutions.",
+      "website": "http://saperix.com/corpeast"
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "bitsight_ci_limit": 5,
+    "bitsight_ci_domain": "saperix.com"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-bitsight-cyber-insurance",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 4724,
+    "timestamp": "2025-04-14 10:34:21"
+  }
+}

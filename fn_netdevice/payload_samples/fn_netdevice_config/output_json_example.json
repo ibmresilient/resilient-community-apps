@@ -1,0 +1,25 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "docker": {
+      "config_command": "ps",
+      "config_result": "ps\n\n    PID TTY          TIME CMD\n  61657 pts/1    00:00:00 bash\n  61668 pts/1    00:00:00 ps\nroot@Testing-community1:~# ",
+      "status": "success"
+    }
+  },
+  "raw": "",
+  "inputs": {
+    "netdevice_ids": "docker",
+    "netdevice_config_cmd": "ps"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-netdevice",
+    "package_version": "1.1.1",
+    "host": "my.app.host",
+    "execution_time_ms": 14034,
+    "timestamp": "2025-04-01 15:19:58"
+  }
+}

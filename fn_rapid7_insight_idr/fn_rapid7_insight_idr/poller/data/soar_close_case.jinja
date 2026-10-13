@@ -1,0 +1,11 @@
+{
+  {# JINJA template for closing a SOAR incident using endpoint data #}
+  "plan_status": "C",
+  "resolution_id": "{{ disposition | soar_substitute('{"BENIGN": "Not an Issue", "MALICIOUS": "Resolved", "UNDECIDED": "Unresolved", "UNKNOWN": "Unresolved", "NOT APPLICABLE": "Not an Issue"}') }}",
+  "resolution_summary": "Closed by Rapid7 InsightIDR, Disposition: {{ disposition.replace('_', ' ')|lower|capitalize }}",
+  {# add additional fields based on your 'on close' field requirements #}
+  "properties": {
+    "rapid7_insight_idr_status": "{{ status|lower|capitalize }}",
+    "rapid7_insight_idr_disposition": "{{ disposition.replace('_', ' ')|title }}"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "queryUIResult": {
+          "type": "string"
+        },
+        "queryResult": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "queryDescription": {
+                "type": "string"
+              },
+              "fipResult": {
+                "type": "string"
+              },
+              "finalResult": {
+                "type": "string"
+              },
+              "queryHTMLPath": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "algosec_service": {
+          "type": "string"
+        },
+        "algosec_source": {
+          "type": "string"
+        },
+        "algosec_destination": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

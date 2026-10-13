@@ -1,0 +1,1 @@
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/rc_data_feed_plugin_odbcfeed/main/1.2/app-rc_data_feed_plugin_odbcfeed-1.2.3-48853.zip

@@ -1,0 +1,82 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "similar_devices": [
+      {
+        "did": 4,
+        "score": 99,
+        "ip": "0.0.0.0",
+        "ips": [
+          {
+            "ip": "0.0.0.0",
+            "timems": 1665511200000,
+            "time": "2022-10-11 18:00:00",
+            "sid": 1
+          }
+        ],
+        "sid": 1,
+        "hostname": "dc.windomain.local",
+        "firstSeen": 1646057145000,
+        "lastSeen": 1665514547000,
+        "os": "Windows 7, 8 or 10",
+        "typename": "dnsserver",
+        "typelabel": "DNS Server"
+      },
+      {
+        "did": 9,
+        "score": 32,
+        "ip": "0.0.0.0",
+        "ips": [
+          {
+            "ip": "0.0.0.0",
+            "timems": 1665511200000,
+            "time": "2022-10-11 18:00:00",
+            "sid": 1
+          }
+        ],
+        "sid": 1,
+        "hostname": "win10.windomain.local",
+        "firstSeen": 1646081506000,
+        "lastSeen": 1665514495000,
+        "os": "Windows NT kernel",
+        "typename": "desktop",
+        "typelabel": "Desktop"
+      },
+      {
+        "did": 8,
+        "score": 24,
+        "ip": "0.0.0.0",
+        "ips": [
+          {
+            "ip": "0.0.0.0",
+            "timems": 1665475200000,
+            "time": "2022-10-11 08:00:00",
+            "sid": 1
+          }
+        ],
+        "sid": 1,
+        "firstSeen": 1646067593000,
+        "lastSeen": 1665475311000,
+        "os": "Linux 2.2.x-3.x",
+        "typename": "server",
+        "typelabel": "Server"
+      }
+    ],
+    "base_url": "https://cloud.darktrace.com"
+  },
+  "raw": null,
+  "inputs": {
+    "darktrace_device_id": "1",
+    "darktrace_device_count": 5
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-darktrace",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 421,
+    "timestamp": "2022-10-11 14:59:36"
+  }
+}

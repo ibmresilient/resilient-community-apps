@@ -1,0 +1,30 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "all_tags": [
+      "This one already exists",
+      "New Tag"
+    ],
+    "added_tags": [
+      "New Tag"
+    ],
+    "error_tags": [
+      "This one already exists"
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "darktrace_device_id": "9",
+    "darktrace_device_tags": "Test,This one already exists"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-darktrace",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 267,
+    "timestamp": "2022-10-10 15:56:42"
+  }
+}

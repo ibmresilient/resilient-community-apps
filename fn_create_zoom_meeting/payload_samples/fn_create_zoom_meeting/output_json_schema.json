@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "host_url": {
+      "type": "string"
+    },
+    "attendee_url": {
+      "type": "string"
+    },
+    "date_created": {
+      "type": "string"
+    },
+    "attendee_url_with_pass": {
+      "type": "string"
+    }
+  }
+}

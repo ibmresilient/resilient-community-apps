@@ -1,0 +1,45 @@
+{
+  {# JINJA template for updating a new SOAR case from an endpoint #}
+  {% if priority_score <= 20 %}
+    "severity_code": "Low",
+  {% elif priority_score <= 29.98%}
+    "severity_code": "Medium",
+  {% else %}
+    "severity_code": "High",
+  {% endif %}
+  "properties": {
+    "randori_target_affiliation_state": "{{ affiliation_state }}",
+    "randori_target_authority": {{ authority | lower }},
+
+    {% if target_temptation is not none %}
+        {% if target_temptation <= 14 %}
+          "randori_target_temptation": "Low",
+        {% elif target_temptation >= 15 and target_temptation <= 29 %}
+          "randori_target_temptation": "Medium",
+        {% elif target_temptation >= 30 and target_temptation <= 39 %}
+          "randori_target_temptation": "High",
+        {% elif target_temptation >= 40 %}
+          "randori_target_temptation": "Critical",
+        {% endif %}
+    {% else %}
+          "randori_target_temptation": "In Review",
+    {% endif %}
+
+    "randori_target_status": "{{ status }}",
+    "randori_target_impact_score": "{{ impact_score }}",
+
+    {% if tech_category is not none %}
+    "randori_target_tech_category": "{{ tech_category | join(', ') }}",
+    {% endif %}
+
+    {% if user_tags is not none %}
+    "randori_target_user_tags": "{{ user_tags | join(', ') }}",
+    {% endif %}
+
+    {% if characteristic_tags is not none %}
+    "randori_target_characteristic_tags": "{{ characteristic_tags | join(', ') }}",
+    {% endif %}
+
+    "randori_target_perspective_name": "{{ perspective_name }}"
+    }
+}
