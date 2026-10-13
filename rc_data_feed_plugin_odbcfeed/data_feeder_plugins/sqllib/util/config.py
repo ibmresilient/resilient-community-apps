@@ -16,6 +16,9 @@ uid=<acct>
 pwd=<pwd>
 # specify file with incident fields to exclude, one per line. Use '*' or '?' for pattern matching. Ex. gdpr*
 # exclude_incident_fields_file = /path/to/exclusion_file.txt
+# Extra reserved words to escape (comma-separated, lowercase). Use when a SOAR
+# field name collides with a DB keyword not in the built-in list. Ex: file, key
+# extra_reserved_words = file, key
 
 
 #[oracle_feed]
@@ -26,6 +29,9 @@ pwd=<pwd>
 #pwd=<pwd>
 # specify file with incident fields to exclude, one per line. Use '*' or '?' for pattern matching. Ex. gdpr*
 # exclude_incident_fields_file = /path/to/exclusion_file.txt
+# Extra reserved words to escape (comma-separated, lowercase). Use when a SOAR
+# field name collides with a DB keyword not in the built-in list. Ex: file, key
+# extra_reserved_words = file, key
 
 
 #[sqlserver_feed]
@@ -36,6 +42,9 @@ pwd=<pwd>
 #pwd=<pwd>
 # specify file with incident fields to exclude, one per line. Use '*' or '?' for pattern matching. Ex. gdpr*
 # exclude_incident_fields_file = /path/to/exclusion_file.txt
+# Extra reserved words to escape (comma-separated, lowercase). Use when a SOAR
+# field name collides with a DB keyword not in the built-in list. Ex: file, key
+# extra_reserved_words = file, key
 
 #[mysql_feed]
 #class=ODBCFeed
@@ -45,10 +54,16 @@ pwd=<pwd>
 #pwd=<pwd>
 # specify file with incident fields to exclude, one per line. Use '*' or '?' for pattern matching. Ex. gdpr*
 # exclude_incident_fields_file = /path/to/exclusion_file.txt
+# Extra reserved words to escape (comma-separated, lowercase). Use when a SOAR
+# field name collides with a DB keyword not in the built-in list. Ex: file, key
+# extra_reserved_words = file, key
 
 #[my_sqlite_feed]
 #class=SQLiteFeed
 #file_name=/tmp/feed.sqlite3
+# Extra reserved words to escape (comma-separated, lowercase). Use when a SOAR
+# field name collides with a DB keyword not in the built-in list. Ex: file, key
+# extra_reserved_words = file, key
 """
 
     return config_data

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import cx_Oracle
+import oracledb as cx_Oracle
 import logging
 import os
 from collections import OrderedDict

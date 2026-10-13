@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2026. All Rights Reserved.
 # pragma pylint: disable=unused-argument, line-too-long
 """Module contains SqlFeedDestinationBase, the base class for all SQL feed destinations."""
 import abc
@@ -55,6 +55,11 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                 raise ValueError("sql_dialect is incorrect: {}".format(dialect_name))
 
             self.dialect = SqlFeedDestinationBase.AVAILABLE_DIALECTS[dialect_name]()
+        
+        extra_words = self._get_extra_reserved_words(options)
+        if extra_words:
+            self.dialect.RESERVE_LIST = list(self.dialect.RESERVE_LIST) + extra_words
+            LOG.info("Extra reserved words added to dialect: %s", extra_words)
 
         self.exclude_fields = self._get_exclude_incident_fields(options)
         LOG.info("Excluding incident fields: %s", self.exclude_fields)
@@ -69,6 +74,17 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
         # thread lock used to limit the number of simultaneous updates needed to database tables
         self.UPDATE_LOCK = Lock()
         self.UPDATE_TABLE_LOCK = {}
+    
+    def _get_extra_reserved_words(self, options: dict) -> list:
+        """Read comma-separated extra reserved words from app.config.
+
+        :param options: app.config settings
+        :type options: dict
+        :return: list of lowercase extra reserved words, or [] if not set
+        :rtype: list
+        """
+        raw = options.get("extra_reserved_words", "")
+        return [w.strip().lower() for w in raw.split(",") if w.strip()]
 
     def _get_exclude_incident_fields(self, options: dict) -> list:
         """read file of excluded fields for db column filtering

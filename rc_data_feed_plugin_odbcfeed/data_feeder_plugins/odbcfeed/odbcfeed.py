@@ -3,12 +3,20 @@
 # pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 """This module contains the definition of the ODBCFeedDestination class."""
-import cx_Oracle
+import oracledb as cx_Oracle
 import logging
-import pyodbc
 import threading
 import traceback
 from retry import retry
+
+try:
+    import pyodbc
+    _PYODBC_OPERATIONAL_ERROR = pyodbc.OperationalError
+    _PYODBC_ERROR = pyodbc.Error
+except ImportError:
+    pyodbc = None  # pyodbc requires unixODBC native libs; unavailable in test environments
+    _PYODBC_OPERATIONAL_ERROR = Exception
+    _PYODBC_ERROR = Exception
 
 from data_feeder_plugins.sqllib.sql_feed_base import SqlFeedDestinationBase
 from data_feeder_plugins.sqllib.sql_dialect import OracleDialect
@@ -41,7 +49,7 @@ class ODBCFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-pu
 
         self._init_tables()
 
-    @retry(pyodbc.OperationalError, tries=10, delay=5, backoff=3, logger=LOG)
+    @retry(_PYODBC_OPERATIONAL_ERROR, tries=10, delay=5, backoff=3, logger=LOG)
     def _reinit(self, connect_str, uid, pwd, dialect=None):
         LOG.info(f"Initializing database connection: {connect_str}")
 
@@ -54,6 +62,8 @@ class ODBCFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-pu
         if dialect and isinstance(dialect, OracleDialect):
             connection = cx_Oracle.connect(uid, pwd, connect_str, encoding="UTF-8")
         else:
+            if pyodbc is None:
+                raise ImportError("pyodbc is not available: install unixODBC (libodbc.so.2) on this system")
             connection = pyodbc.connect(connect_str, uid=uid, pwd=pwd, autocommit=True)
 
         self.THREAD_CONNECTION[thread_id] = connection
@@ -73,7 +83,7 @@ class ODBCFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-pu
         LOG.debug(f"thread: {thread_id} connection: {self.connect_str} {id(self.THREAD_CONNECTION[thread_id])}")
         try:
             return self.THREAD_CONNECTION[thread_id].cursor()
-        except pyodbc.Error as err:
+        except _PYODBC_ERROR as err:
             LOG.error(str(err))
             LOG.error(traceback.format_exc())
             self._reinit(self.connect_str, self.uid, self.pwd, dialect=self.dialect)

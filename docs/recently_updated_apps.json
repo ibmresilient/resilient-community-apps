@@ -1,10 +1,10 @@
 [
+  "rc_data_feed_plugin_odbcfeed",
   "rc_data_feed",
   "fn_qradar_enhanced_data",
   "fn_exchange_online",
   "fn_timer",
   "fn_service_now",
   "sc_email_parser",
-  "fn_watsonx_analyst",
-  "fn_scheduler"
+  "fn_watsonx_analyst"
 ]

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2026. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 """This module contains all of the SqlDialect implementations that we support."""
@@ -7,7 +7,12 @@
 import copy
 import logging
 import sqlite3
-import pyodbc
+try:
+    import pyodbc
+    _PYODBC_SQL_WCHAR = pyodbc.SQL_WCHAR
+except ImportError:
+    pyodbc = None
+    _PYODBC_SQL_WCHAR = None
 import sys
 import sqlparams
 from datetime import datetime, timezone
@@ -24,7 +29,8 @@ ORACLE_ENCODING="utf-16le"
 class SqlDialect:
     """Base class for all SQL dialects that we will support."""
     def __init__(self):
-        pass
+        # Copy class-level RESERVE_LIST to instance so per-instance
+        self.RESERVE_LIST = list(self.__class__.RESERVE_LIST)
 
     def get_upsert(self, table_name, field_names, field_types):
         """
@@ -334,7 +340,7 @@ class PostgreSQL96Dialect(ODBCDialectBase):
         return False
 
     def configure_connection(self, connection):
-        connection.setdecoding(pyodbc.SQL_WCHAR, encoding=ENCODING)  # pylint: disable=c-extension-no-member
+        connection.setdecoding(_PYODBC_SQL_WCHAR, encoding=ENCODING)  # pylint: disable=c-extension-no-member
         if sys.version_info.major == 2: # to set encoding on python 2
             connection.setencoding(str, encoding=ENCODING)
             connection.setencoding(unicode, encoding=ENCODING)
@@ -491,7 +497,7 @@ class MySqlDialect(ODBCDialectBase):
         return 'TEXT'
 
     def configure_connection(self, connection):
-        connection.setdecoding(pyodbc.SQL_WCHAR, encoding=ENCODING)  # pylint: disable=c-extension-no-member
+        connection.setdecoding(_PYODBC_SQL_WCHAR, encoding=ENCODING)  # pylint: disable=c-extension-no-member
         if sys.version_info.major == 2: # to set encoding on python 2
             connection.setencoding(str, encoding=ENCODING)
             connection.setencoding(unicode, encoding=ENCODING)
@@ -908,7 +914,7 @@ END; """
     def configure_connection(self, connection):
         return True
         """
-        connection.setdecoding(pyodbc.SQL_WCHAR, encoding=ORACLE_ENCODING)  # pylint: disable=c-extension-no-member
+        connection.setdecoding(_PYODBC_SQL_WCHAR, encoding=ORACLE_ENCODING)  # pylint: disable=c-extension-no-member
         if sys.version_info.major == 2: # to set encoding on python 2
             connection.setencoding(str, encoding=ORACLE_ENCODING)
             connection.setencoding(unicode, encoding=ORACLE_ENCODING)

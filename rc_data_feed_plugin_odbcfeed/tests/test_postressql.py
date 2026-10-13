@@ -19,10 +19,11 @@ FIND_COLUMNS_STMT = "SELECT column_name, data_type FROM information_schema.colum
 
 app_config = {
     "class": "ODBCFeed",
-    "odbc_connect": "Driver={{PostgreSQL}};Server=127.0.0.1;DB={db};Port=5432;connectTimeout=0".format(db=TEST_DB),
+    "odbc_connect": "Driver={{PostgreSQL}};Server=127.0.0.1;Database={db};Port=5432;connectTimeout=0".format(db=TEST_DB),
     "sql_dialect": "PostgreSQL96Dialect",
     "uid": "res_test",
-    "pwd": "res_test"
+    "pwd": "res_test",
+    "extra_reserved_words": "system_user"
 }
 
 SETUP_STMT = "set timezone='UTC'"
@@ -91,3 +92,22 @@ def test_blob():
     common.test_createtable()
 
     common.test_insert_blob(PostgreSQL96Dialect.make_blob)
+
+@pytest.mark.livetest
+def test_system_user_column_with_extra_reserved_words():
+    """
+    system_user is reserved in PostgreSQL but absent from the built-in list.
+    Without extra_reserved_words → DDL syntax error.
+    With    extra_reserved_words = system_user → column created as system_user_
+    """
+    config = {**app_config, "extra_reserved_words": "system_user"}
+
+    fields = [
+        {"name": "id",          "input_type": "number"},
+        {"name": "inc_id",      "input_type": "number"},
+        {"name": "system_user", "input_type": "text"},
+    ]
+
+    common = SQLCommon(config, table_name="test_reserved", table_def=fields)
+    common.test_createtable()
+    common.test_droptable()
