@@ -1,0 +1,29 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "kind": "object#NetworkObj",
+    "selfLink": "https://192.168.1.163/api/objects/networkobjects/MyFqdn",
+    "name": "MyFqdn",
+    "host": {
+      "kind": "IPv4FQDN",
+      "value": "www.fqdn.com"
+    },
+    "description": "fqdn name",
+    "objectId": "MyFqdn"
+  },
+  "raw": "{\"kind\": \"object#NetworkObj\", \"selfLink\": \"https://192.168.1.163/api/objects/networkobjects/MyFqdn\", \"name\": \"MyFqdn\", \"host\": {\"kind\": \"IPv4FQDN\", \"value\": \"www.fqdn.com\"}, \"description\": \"fqdn name\", \"objectId\": \"MyFqdn\"}",
+  "inputs": {
+    "cisco_asa_network_object_id": "MyFqdn",
+    "cisco_asa_firewall": "firewall_1"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-cisco-asa",
+    "package_version": "1.0.0",
+    "host": "MacBook-Pro.local",
+    "execution_time_ms": 69,
+    "timestamp": "2022-06-24 12:30:59"
+  }
+}

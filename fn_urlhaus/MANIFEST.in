@@ -1,0 +1,6 @@
+include README.md
+include Dockerfile
+include apikey_permissions.txt
+include fn_urlhaus/LICENSE
+recursive-include fn_urlhaus/util *
+recursive-include doc *

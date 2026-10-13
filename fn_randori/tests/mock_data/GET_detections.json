@@ -1,0 +1,102 @@
+{
+    "count":1,
+    "data":[
+       {
+          "affiliation_state":"None",
+          "applicability":2,
+          "attack_note":"",
+          "authority":true,
+          "authority_distance":0,
+          "authority_override":false,
+          "authorization_state":"None",
+          "banners_uuid":null,
+          "cert_uuid":"0caabe31-4ede-4e24-9507-f9ebc106951f",
+          "characteristic_tags":[
+             "DefaultPage",
+             "Login",
+             "OldCopyright"
+          ],
+          "characteristics_count":3,
+          "confidence":75,
+          "cpe":null,
+          "criticality":4,
+          "deleted":false,
+          "description":"F5 BigIP Management Interface is used to configure the F5 BigIP appliance.",
+          "detection_criteria":{
+             "http":{
+                "host":"cadillac.demo.webernets.online",
+                "method":"GET",
+                "path":"/",
+                "version":1.1
+             },
+             "ip":{
+                "address":"34.149.126.94",
+                "version":4
+             },
+             "tcp":{
+                "port":443
+             },
+             "tls":{
+                "version":3.3
+             }
+          },
+          "detection_relevance":1130,
+          "enumerability":3,
+          "exploitability":5,
+          "first_seen":"2022-07-07T02:05:22.741389+00:00",
+          "headers_uuid":"fa611a9c-ad8f-46f1-b634-66beec8ea420",
+          "hostname":"cadillac.demo.webernets.online",
+          "hostname_id":"2846739b-372d-4cc6-8713-2bcaedd50bd3",
+          "id":"dbc63810-c21f-427f-a5ff-9053215105d1,ef9a021a-1bd1-4743-92e9-71a96211bf5c",
+          "impact_score":"None",
+          "ip":"34.149.126.94",
+          "ip_id":"5b3beaa8-d24c-4861-97de-27dc3b5f9bf2",
+          "ip_str":"34.149.126.94",
+          "last_seen":"2022-10-18T10:38:38.000772+00:00",
+          "lens_id":"08a90512-fb94-4766-9cc7-7a945e934638",
+          "lens_view":"public",
+          "name":"BigIP Configuration Management Interface",
+          "org_id":"923af5dd-50ce-4d80-a55f-707dfe08411e",
+          "path":"/",
+          "perspective":"00000000-0000-0000-0000-000000000000",
+          "perspective_name":"PUBLIC",
+          "poc_email":null,
+          "poc_id":null,
+          "port":443,
+          "post_exploit":4,
+          "priority_impact_factor":0.0,
+          "priority_score":146.4,
+          "priority_status_factor":0.1525,
+          "priority_tags_factor":0.2745,
+          "private_weakness":0,
+          "protocol":"tcp",
+          "public_weakness":5,
+          "randori_notes":"Randori recommends blocking access to the BigIP Management interface.\\n\\nhttps://support.f5.com/csp/article/K55879220",
+          "reference":"",
+          "research":4,
+          "screenshot_uuid":"53380d71-d1bf-4c17-ab5a-f52744a8706d",
+          "service_id":"6ca1db3d-c8ac-4f63-9a5f-77ac71591b9b",
+          "status":"Needs Resolution",
+          "target_confidence":75,
+          "target_first_seen":"2022-07-07T07:19:09.157578+00:00",
+          "target_id":"ef9a021a-1bd1-4743-92e9-71a96211bf5c",
+          "target_last_seen":"2022-10-17T04:59:09.678951+00:00",
+          "target_num_detections":1,
+          "target_temptation":61,
+          "tech_category":[
+             "Load Balancers"
+          ],
+          "temptation_last_modified":"2022-05-09T16:40:35.674167+00:00",
+          "thumbnail_uuid":"b938b47b-e576-4255-b91c-925c913e4d64",
+          "user_tags":[
+             "Google",
+             "Unknown - By Tenable",
+             "Wildcard Cert"
+          ],
+          "vendor":"F5",
+          "version":""
+       }
+    ],
+    "offset":0,
+    "total":1
+}

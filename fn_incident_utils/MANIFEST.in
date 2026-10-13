@@ -1,0 +1,7 @@
+include README.md
+recursive-include fn_incident_utils/util *
+include doc/*.md
+include doc/screenshots/*
+include data/*
+
+exclude *.bak

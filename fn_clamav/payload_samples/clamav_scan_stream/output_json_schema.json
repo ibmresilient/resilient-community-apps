@@ -1,0 +1,58 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "incident_id": {
+            "type": "integer"
+          },
+          "artifact_id": {
+            "type": "integer"
+          },
+          "task_id": {
+            "type": "null"
+          },
+          "attachment_id": {
+            "type": "null"
+          }
+        },
+        "required": [
+          "incident_id",
+          "artifact_id",
+          "task_id",
+          "attachment_id"
+        ]
+      },
+      "file_name": {
+        "type": "string"
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "stream": {
+            "type": "array",
+            "items": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "required": [
+          "stream"
+        ]
+      }
+    },
+    "required": [
+      "inputs",
+      "file_name",
+      "response"
+    ]
+  }
+  
+  

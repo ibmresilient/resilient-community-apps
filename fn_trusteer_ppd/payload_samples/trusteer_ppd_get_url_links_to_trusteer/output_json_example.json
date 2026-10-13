@@ -1,0 +1,21 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "link_url_puid": "https://customer-name.trusteer.com/search-results?puid=PUID-808949021a04d66f9e54192028693507",
+    "link_url_device_id": null
+  },
+  "raw": null,
+  "inputs": {
+    "trusteer_ppd_puid": "PUID-808949021a04d66f9e54192028693507"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-trusteer-ppd",
+    "package_version": "1.0.0",
+    "host": "laptop.local",
+    "execution_time_ms": 1,
+    "timestamp": "2023-02-27 14:24:00"
+  }
+}

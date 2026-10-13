@@ -1,0 +1,26 @@
+{
+  {# JINJA template for updating a new SOAR incident from an endpoint #}
+  {# modify to specify your specific **data** fields #}
+  "plan_status": "{{ status|soar_substitute('{"CLOSED": "C", "INVESTIGATING": "A", "OPEN": "A", "WAITING": "A"}') }}",
+  {% if priority|lower == "critical" %}
+    "severity_code": "High",
+    {% elif priority|lower == "high" %}
+    "severity_code": "High",
+    {% elif priority|lower == "medium" %}
+    "severity_code": "Medium",
+    {% elif priority|lower == "low" %}
+    "severity_code": "Low",
+    {% else %}
+    "severity_code": "High",
+  {% endif %}
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "rapid7_insight_idr_source": "{{ source|lower|capitalize }}",
+    "rapid7_insight_idr_status": "{{ status|lower|capitalize }}",
+    "rapid7_insight_idr_assignee": "{{ assignee.name }}",
+    "rapid7_insight_idr_assignee_email": "{{ assignee.email }}",
+    "rapid7_insight_idr_disposition": "{{ disposition.replace('_', ' ')|title }}",
+    "rapid7_insight_idr_responsibility": "{{ responsibility }}",
+    "rapid7_insight_idr_link": "<a target='_blank' href='{{ entity_url }}'>Investigation</a>"
+  }
+}

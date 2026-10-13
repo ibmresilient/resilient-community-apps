@@ -1,0 +1,20 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {},
+  "raw": null,
+  "inputs": {
+    "ocm_incident_comment": "hello",
+    "ocm_comment_author": "me",
+    "ocm_incident_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ocm",
+    "package_version": "1.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 6816,
+    "timestamp": "2025-05-23 11:13:18"
+  }
+}

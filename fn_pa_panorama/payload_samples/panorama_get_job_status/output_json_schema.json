@@ -1,0 +1,151 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "@status": {
+          "type": "string"
+        },
+        "result": {
+          "type": "object",
+          "properties": {
+            "job": {
+              "type": "object",
+              "properties": {
+                "tenq": {
+                  "type": "string"
+                },
+                "tdeq": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "queued": {
+                  "type": "string"
+                },
+                "stoppable": {
+                  "type": "string"
+                },
+                "result": {
+                  "type": "string"
+                },
+                "tfin": {
+                  "type": "string"
+                },
+                "description": {},
+                "positionInQ": {
+                  "type": "string"
+                },
+                "progress": {
+                  "type": "string"
+                },
+                "push_type": {
+                  "type": "string"
+                },
+                "dgname": {
+                  "type": "string"
+                },
+                "sched": {
+                  "type": "string"
+                },
+                "warnings": {},
+                "devices": {
+                  "type": "object",
+                  "properties": {
+                    "entry": {
+                      "type": "object",
+                      "properties": {
+                        "serial-no": {
+                          "type": "string"
+                        },
+                        "devicename": {},
+                        "multi-vsys": {
+                          "type": "string"
+                        },
+                        "vsys": {},
+                        "status": {
+                          "type": "string"
+                        },
+                        "result": {
+                          "type": "string"
+                        },
+                        "tstart": {
+                          "type": "string"
+                        },
+                        "tfin": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "properties": {
+                            "msg": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "panorama_job_id": {
+          "type": "integer"
+        },
+        "panorama_label": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

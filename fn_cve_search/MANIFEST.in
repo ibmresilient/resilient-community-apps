@@ -1,0 +1,4 @@
+include README.md
+recursive-include fn_cve_search/util *
+include fn_cve_search/LICENSE
+include screenshots/*

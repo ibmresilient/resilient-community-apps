@@ -1,0 +1,1 @@
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/rc_data_feed/main/3.3/app-rc_data_feed-3.3.3-48835.zip

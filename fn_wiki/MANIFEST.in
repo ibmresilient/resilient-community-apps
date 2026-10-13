@@ -1,0 +1,7 @@
+include README.md
+include Dockerfile
+include api_permissions.txt
+include entrypoint.sh
+recursive-include fn_wiki/util/ *
+include fn_wiki/lib/*
+include fn_wiki/LICENSE

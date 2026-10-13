@@ -1,0 +1,15 @@
+pytest
+pytest-resilient-circuits
+resilient
+resilient_lib
+resilient_sdk
+resilient-circuits
+pytest-cov
+memray==1.17.2
+pytest-memray==1.7.0
+sphinx
+furo
+sphinx-copybutton
+build
+myst-parser
+sphinx-design

@@ -1,0 +1,54 @@
+/* This allows the "TOC" list on the landing page to be multi-column so that it isn't so crazy long */
+div .toctree-wrapper {
+    column-count: 2;
+    margin: 10px;
+}
+div .toctree-wrapper > ul { margin: 0; }
+ul .toctree-l1 {
+    margin: 0;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid-column;
+}
+section#ibm-security-qradar-soar-apps .caption {
+    line-height: 0px;
+    margin-top: 0px;
+}
+section#ibm-security-qradar-soar-apps span.caption-text {
+    display: none;
+}
+
+/* style built-in navigation controls so they clearly behave like dropdowns */
+.sidebar-tree .toctree-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar-tree li.toctree-l1.has-children {
+    position: relative;
+}
+
+.sidebar-tree li.toctree-l1.has-children > a.reference.internal {
+    display: inline-block;
+    padding-right: 1.5rem;
+}
+
+.sidebar-tree label[for^="toctree-checkbox-"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-left: 0.25rem;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.sidebar-tree label[for^="toctree-checkbox-"] .icon {
+    transition: transform 0.2s ease-in-out;
+}
+
+.sidebar-tree .toctree-checkbox:checked + label .icon {
+    transform: rotate(90deg);
+}

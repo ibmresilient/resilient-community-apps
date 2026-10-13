@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "success_verdict": {
+          "type": "boolean"
+        },
+        "success_status": {
+          "type": "boolean"
+        },
+        "threat_id": {
+          "type": "string"
+        },
+        "threat_analyst_verdict": {
+          "type": "string"
+        },
+        "threat_status": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "sentinelone_threat_id": {
+          "type": "string"
+        },
+        "sentinelone_threat_analyst_verdict": {
+          "type": "string"
+        },
+        "sentinelone_threat_status": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

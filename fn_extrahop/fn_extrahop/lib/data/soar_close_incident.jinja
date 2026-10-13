@@ -1,0 +1,12 @@
+{
+  {# JINJA template for closing a SOAR incident from an ExtraHop detection. #}
+  "plan_status": "C",
+  "resolution_id": "{{ resolution | soar_substitute('{"None": "Unresolved", "no_action_taken": "Not an Issue", "action_taken": "Resolved"}') }}",
+  "resolution_summary": "Closed by ExtraHop, Detection resolution = {{ resolution }}",
+  "properties": {
+    "extrahop_status": "{{ status | string |soar_substitute('{"None": "None"}') }}",
+    "extrahop_ticket_id": "{{ ticket_id |soar_substitute('{"None": "None"}') }}",
+    "extrahop_assignee": "{{ assignee | string |soar_substitute('{"None": "None"}') }}",
+    "extrahop_update_notification": "<span style='color:red;'>The ExtraHop Detection has been closed.</span><br><div>To refresh the incident run the playbook: Extrahop Reveal(x): Refresh Case (PB).<div/>"
+  }
+}

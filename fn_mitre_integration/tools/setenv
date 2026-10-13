@@ -1,0 +1,2 @@
+#export MITRE_HTTP_PROXY=http://proxy:8080
+#export MITRE_HTTPS_PROXY=https://proxy:8080

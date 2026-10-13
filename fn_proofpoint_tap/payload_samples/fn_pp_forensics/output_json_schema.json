@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "incident_id": {
+          "type": "integer"
+        },
+        "campaign_id": {},
+        "threat_id": {
+          "type": "string"
+        },
+        "aggregate_flag": {},
+        "malicious_flag": {
+          "type": "boolean"
+        }
+      }
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "num_reports": {
+      "type": "integer"
+    }
+  }
+}

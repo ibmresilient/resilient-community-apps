@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "created_by": {
+          "type": "string"
+        },
+        "create_time": {
+          "type": "string"
+        },
+        "override_list": {
+          "type": "string"
+        },
+        "override_type": {
+          "type": "string"
+        },
+        "description": {},
+        "source": {
+          "type": "string"
+        },
+        "source_ref": {},
+        "sha256_hash": {
+          "type": "string"
+        },
+        "filename": {}
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "vmware_cbc_reputation_override": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

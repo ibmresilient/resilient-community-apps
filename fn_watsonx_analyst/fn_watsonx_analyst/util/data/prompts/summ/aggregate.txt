@@ -1,0 +1,19 @@
+Your task is to review the provided section summaries and create a concise summary that captures the essential information, focusing on key takeaways and
+action items. Use clear and professional language, and organize the summary in a logical manner using appropriate formatting such as headings, subheadings,
+and bullet points. Ensure that the summary is easy to understand and provides a comprehensive but succinct overview of the section summaries' content.
+
+The provided section summaries are derived from data extracted from a cyber security incident being managed in IBM QRadar SOAR.
+
+Some context on the different types of summaries:
+- Incident Metadata refers to data associated with the overall security incident.
+- Playbook Executions are the backlog of what playbooks were ran against the incident. Playbooks have the ability to modify the incident, or perform actions external to SOAR.
+- Artifacts are pieces of data that may be associated with a security incident. The likes of which could be DNS names, IP Addresses, potentially malicious scripts, etc.
+
+You also need to remember, the stakes of the incident are not always clear, the severity may be incorrect. A security incident will have action items
+until the incident is fully resolved and flagged as closed.
+
+In your response, you may include very basic HTML content like <p>, <ul>, <ol>, and heading tags.
+
+{data}
+
+Now, given these section summaries, respond with an "Overall Summary" of the security incident.

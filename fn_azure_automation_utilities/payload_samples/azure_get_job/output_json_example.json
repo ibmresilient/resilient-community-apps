@@ -1,0 +1,44 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/jobs/1692024049238",
+    "name": "1692024049238",
+    "type": "Microsoft.Automation/AutomationAccounts/Jobs",
+    "properties": {
+      "jobId": "efe4db52-a124-4bea-9582-7b0c7f7133e4",
+      "creationTime": "2023-08-14T14:42:29.5306946+00:00",
+      "provisioningState": "Succeeded",
+      "status": "Completed",
+      "statusDetails": "None",
+      "startedBy": "{scrubbed}",
+      "startTime": "2023-08-14T14:42:41.9604553+00:00",
+      "endTime": "2023-08-14T14:42:55.9297673+00:00",
+      "lastModifiedTime": "2023-08-14T14:42:55.9297673+00:00",
+      "lastStatusModifiedTime": "2023-08-14T14:42:55.9297673+00:00",
+      "exception": null,
+      "parameters": {
+        "runbook_name": "get_all_runbooks"
+      },
+      "runOn": "",
+      "runbook": {
+        "name": "Get_given_runbook"
+      }
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "job_name": "1692024049238",
+    "account_name": "automation1",
+    "resource_group_name": "demoassets"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-azure-automation-utilities",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 533,
+    "timestamp": "2023-08-16 14:52:41"
+  }
+}

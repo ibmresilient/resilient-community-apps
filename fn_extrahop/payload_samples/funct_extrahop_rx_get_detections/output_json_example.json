@@ -1,0 +1,105 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "result": {
+      "id": 4294967305,
+      "start_time": 1681140240000,
+      "update_time": 1681140270000,
+      "end_time": 1681140270000,
+      "mod_time": 1681144146129,
+      "title": "HTTP Request to a Suspicious Host",
+      "description": "[pc3](#/metrics/devices/44522fe6bb834d83a3b0a142b7da750a.0e3da802a0b30000/overview?from=1681140240&interval_type=DT&until=1681140270) sent an HTTP request that included a suspicious host in the request header. This host is considered suspicious based on threat intelligence found in your ExtraHop system. Confirm whether [pc3](#/metrics/devices/44522fe6bb834d83a3b0a142b7da750a.0e3da802a0b30000/overview?from=1681140240&interval_type=DT&until=1681140270) is the victim of a malware or phishing attack.\n\nSuspicious hostname linked to this detection:\n* zupertech.com",
+      "categories": [
+        "sec",
+        "sec.caution"
+      ],
+      "risk_score": 60,
+      "type": "ti_http_host",
+      "properties": {
+        "host": "zupertech.com"
+      },
+      "participants": [
+        {
+          "role": "offender",
+          "object_id": 4294967310,
+          "object_type": "device",
+          "id": 1285,
+          "external": false
+        }
+      ],
+      "ticket_id": "3390",
+      "assignee": "admin@example.com",
+      "status": "closed",
+      "resolution": "action_taken",
+      "mitre_tactics": [
+        {
+          "id": "TA0001",
+          "name": "Initial Access",
+          "url": "https://attack.mitre.org/tactics/TA0001"
+        },
+        {
+          "id": "TA0010",
+          "name": "Exfiltration",
+          "url": "https://attack.mitre.org/tactics/TA0010"
+        },
+        {
+          "id": "TA0011",
+          "name": "Command and Control",
+          "url": "https://attack.mitre.org/tactics/TA0011"
+        }
+      ],
+      "mitre_techniques": [
+        {
+          "id": "T1041",
+          "name": "Exfiltration Over C2 Channel",
+          "url": "https://attack.mitre.org/techniques/T1041",
+          "legacy_ids": [
+            "T1041"
+          ]
+        },
+        {
+          "id": "T1189",
+          "name": "Drive-by Compromise",
+          "url": "https://attack.mitre.org/techniques/T1189",
+          "legacy_ids": [
+            "T1189"
+          ]
+        },
+        {
+          "id": "T1566",
+          "name": "Phishing",
+          "url": "https://attack.mitre.org/techniques/T1566",
+          "legacy_ids": [
+            "T1192"
+          ]
+        },
+        {
+          "id": "T1573",
+          "name": "Encrypted Channel",
+          "url": "https://attack.mitre.org/techniques/T1573",
+          "legacy_ids": [
+            "T1024",
+            "T1032",
+            "T1079"
+          ]
+        }
+      ],
+      "appliance_id": 1,
+      "is_user_created": false
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "extrahop_detection_id": 4294967305
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-extrahop",
+    "package_version": "1.0.0",
+    "host": "MBP",
+    "execution_time_ms": 459,
+    "timestamp": "2023-04-10 14:18:51"
+  }
+}

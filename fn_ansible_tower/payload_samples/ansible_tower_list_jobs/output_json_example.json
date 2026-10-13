@@ -1,0 +1,337 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "id": 1,
+      "type": "job",
+      "url": "/api/v2/jobs/1/",
+      "related": {
+        "created_by": "/api/v2/users/1/",
+        "labels": "/api/v2/jobs/1/labels/",
+        "inventory": "/api/v2/inventories/1/",
+        "project": "/api/v2/projects/6/",
+        "organization": "/api/v2/organizations/1/",
+        "credentials": "/api/v2/jobs/1/credentials/",
+        "unified_job_template": "/api/v2/job_templates/7/",
+        "stdout": "/api/v2/jobs/1/stdout/",
+        "execution_environment": "/api/v2/execution_environments/2/",
+        "job_events": "/api/v2/jobs/1/job_events/",
+        "job_host_summaries": "/api/v2/jobs/1/job_host_summaries/",
+        "activity_stream": "/api/v2/jobs/1/activity_stream/",
+        "notifications": "/api/v2/jobs/1/notifications/",
+        "create_schedule": "/api/v2/jobs/1/create_schedule/",
+        "job_template": "/api/v2/job_templates/7/",
+        "cancel": "/api/v2/jobs/1/cancel/",
+        "project_update": "/api/v2/project_updates/2/",
+        "relaunch": "/api/v2/jobs/1/relaunch/"
+      },
+      "summary_fields": {
+        "organization": {
+          "id": 1,
+          "name": "Default",
+          "description": ""
+        },
+        "inventory": {
+          "id": 1,
+          "name": "Demo Inventory",
+          "description": "",
+          "has_active_failures": true,
+          "total_hosts": 3,
+          "hosts_with_active_failures": 2,
+          "total_groups": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0,
+          "organization_id": 1,
+          "kind": ""
+        },
+        "execution_environment": {
+          "id": 2,
+          "name": "AWX EE (latest)",
+          "description": "",
+          "image": "quay.io/ansible/awx-ee:latest"
+        },
+        "project": {
+          "id": 6,
+          "name": "Demo Project",
+          "description": "",
+          "status": "successful",
+          "scm_type": "git",
+          "allow_override": false
+        },
+        "project_update": {
+          "id": 2,
+          "name": "Demo Project",
+          "description": "",
+          "status": "failed",
+          "failed": true
+        },
+        "job_template": {
+          "id": 7,
+          "name": "Demo Job Template",
+          "description": ""
+        },
+        "unified_job_template": {
+          "id": 7,
+          "name": "Demo Job Template",
+          "description": "",
+          "unified_job_type": "job"
+        },
+        "instance_group": {
+          "id": 2,
+          "name": "default",
+          "is_container_group": true
+        },
+        "created_by": {
+          "id": 1,
+          "username": "admin",
+          "first_name": "",
+          "last_name": ""
+        },
+        "user_capabilities": {
+          "delete": true,
+          "start": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "credentials": [
+          {
+            "id": 1,
+            "name": "Demo Credential",
+            "description": "",
+            "kind": "ssh",
+            "cloud": false
+          }
+        ]
+      },
+      "created": "2024-10-29T20:05:00.601852Z",
+      "modified": "2024-10-29T20:05:19.693197Z",
+      "name": "Demo Job Template",
+      "description": "",
+      "unified_job_template": 7,
+      "launch_type": "manual",
+      "status": "error",
+      "execution_environment": 2,
+      "failed": true,
+      "started": "2024-10-29T20:05:20.738778Z",
+      "finished": "2024-10-29T20:05:53.607320Z",
+      "canceled_on": null,
+      "elapsed": 32.869,
+      "job_explanation": "Previous Task Failed: {\"job_type\": \"project_update\", \"job_name\": \"Demo Project\", \"job_id\": \"2\"}",
+      "execution_node": "",
+      "controller_node": "awx-demo-task-55c9cf6ccc-8slzb",
+      "launched_by": {
+        "id": 1,
+        "name": "admin",
+        "type": "user",
+        "url": "/api/v2/users/1/"
+      },
+      "work_unit_id": null,
+      "job_type": "run",
+      "inventory": 1,
+      "project": 6,
+      "playbook": "hello_world.yml",
+      "scm_branch": "",
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "{}",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "use_fact_cache": false,
+      "organization": 1,
+      "job_template": 7,
+      "passwords_needed_to_start": [],
+      "allow_simultaneous": false,
+      "artifacts": {},
+      "scm_revision": "",
+      "instance_group": 2,
+      "diff_mode": false,
+      "job_slice_number": 0,
+      "job_slice_count": 1,
+      "webhook_service": "",
+      "webhook_credential": null,
+      "webhook_guid": ""
+    },
+    {
+      "id": 3,
+      "type": "job",
+      "url": "/api/v2/jobs/3/",
+      "related": {
+        "created_by": "/api/v2/users/1/",
+        "labels": "/api/v2/jobs/3/labels/",
+        "inventory": "/api/v2/inventories/1/",
+        "project": "/api/v2/projects/6/",
+        "organization": "/api/v2/organizations/1/",
+        "credentials": "/api/v2/jobs/3/credentials/",
+        "unified_job_template": "/api/v2/job_templates/7/",
+        "stdout": "/api/v2/jobs/3/stdout/",
+        "execution_environment": "/api/v2/execution_environments/2/",
+        "job_events": "/api/v2/jobs/3/job_events/",
+        "job_host_summaries": "/api/v2/jobs/3/job_host_summaries/",
+        "activity_stream": "/api/v2/jobs/3/activity_stream/",
+        "notifications": "/api/v2/jobs/3/notifications/",
+        "create_schedule": "/api/v2/jobs/3/create_schedule/",
+        "job_template": "/api/v2/job_templates/7/",
+        "cancel": "/api/v2/jobs/3/cancel/",
+        "project_update": "/api/v2/project_updates/4/",
+        "relaunch": "/api/v2/jobs/3/relaunch/"
+      },
+      "summary_fields": {
+        "organization": {
+          "id": 1,
+          "name": "Default",
+          "description": ""
+        },
+        "inventory": {
+          "id": 1,
+          "name": "Demo Inventory",
+          "description": "",
+          "has_active_failures": true,
+          "total_hosts": 3,
+          "hosts_with_active_failures": 2,
+          "total_groups": 0,
+          "has_inventory_sources": false,
+          "total_inventory_sources": 0,
+          "inventory_sources_with_failures": 0,
+          "organization_id": 1,
+          "kind": ""
+        },
+        "execution_environment": {
+          "id": 2,
+          "name": "AWX EE (latest)",
+          "description": "",
+          "image": "quay.io/ansible/awx-ee:latest"
+        },
+        "project": {
+          "id": 6,
+          "name": "Demo Project",
+          "description": "",
+          "status": "successful",
+          "scm_type": "git",
+          "allow_override": false
+        },
+        "project_update": {
+          "id": 4,
+          "name": "Demo Project",
+          "description": "",
+          "status": "successful",
+          "failed": false
+        },
+        "job_template": {
+          "id": 7,
+          "name": "Demo Job Template",
+          "description": ""
+        },
+        "unified_job_template": {
+          "id": 7,
+          "name": "Demo Job Template",
+          "description": "",
+          "unified_job_type": "job"
+        },
+        "instance_group": {
+          "id": 2,
+          "name": "default",
+          "is_container_group": true
+        },
+        "created_by": {
+          "id": 1,
+          "username": "admin",
+          "first_name": "",
+          "last_name": ""
+        },
+        "user_capabilities": {
+          "delete": true,
+          "start": true
+        },
+        "labels": {
+          "count": 0,
+          "results": []
+        },
+        "credentials": [
+          {
+            "id": 1,
+            "name": "Demo Credential",
+            "description": "",
+            "kind": "ssh",
+            "cloud": false
+          }
+        ]
+      },
+      "created": "2024-10-29T20:07:48.518612Z",
+      "modified": "2024-10-29T20:07:50.312690Z",
+      "name": "Demo Job Template",
+      "description": "",
+      "unified_job_template": 7,
+      "launch_type": "manual",
+      "status": "failed",
+      "execution_environment": 2,
+      "failed": true,
+      "started": "2024-10-29T20:07:51.366859Z",
+      "finished": "2024-10-29T20:11:50.355828Z",
+      "canceled_on": null,
+      "elapsed": 238.989,
+      "job_explanation": "",
+      "execution_node": "",
+      "controller_node": "awx-demo-task-55c9cf6ccc-8slzb",
+      "launched_by": {
+        "id": 1,
+        "name": "admin",
+        "type": "user",
+        "url": "/api/v2/users/1/"
+      },
+      "work_unit_id": "cYeMz3Uy",
+      "job_type": "run",
+      "inventory": 1,
+      "project": 6,
+      "playbook": "hello_world.yml",
+      "scm_branch": "",
+      "forks": 0,
+      "limit": "",
+      "verbosity": 0,
+      "extra_vars": "{}",
+      "job_tags": "",
+      "force_handlers": false,
+      "skip_tags": "",
+      "start_at_task": "",
+      "timeout": 0,
+      "use_fact_cache": false,
+      "organization": 1,
+      "job_template": 7,
+      "passwords_needed_to_start": [],
+      "allow_simultaneous": false,
+      "artifacts": {},
+      "scm_revision": "xxxxyyyyzzzz",
+      "instance_group": 2,
+      "diff_mode": false,
+      "job_slice_number": 0,
+      "job_slice_count": 1,
+      "webhook_service": "",
+      "webhook_credential": null,
+      "webhook_guid": ""
+    }
+  ],
+  "raw": "[{\"id\": 1, \"type\": \"job\", \"url\": \"/api/v2/jobs/1/\", \"related\": {\"created_by\": \"/api/v2/users/1/\", \"labels\": \"/api/v2/jobs/1/labels/\", \"inventory\": \"/api/v2/inventories/1/\", \"project\": \"/api/v2/projects/6/\", \"organization\": \"/api/v2/organizations/1/\", \"credentials\": \"/api/v2/jobs/1/credentials/\", \"unified_job_template\": \"/api/v2/job_templates/7/\", \"stdout\": \"/api/v2/jobs/1/stdout/\", \"execution_environment\": \"/api/v2/execution_environments/2/\", \"job_events\": \"/api/v2/jobs/1/job_events/\", \"job_host_summaries\": \"/api/v2/jobs/1/job_host_summaries/\", \"activity_stream\": \"/api/v2/jobs/1/activity_stream/\", \"notifications\": \"/api/v2/jobs/1/notifications/\", \"create_schedule\": \"/api/v2/jobs/1/create_schedule/\", \"job_template\": \"/api/v2/job_templates/7/\", \"cancel\": \"/api/v2/jobs/1/cancel/\", \"project_update\": \"/api/v2/project_updates/2/\", \"relaunch\": \"/api/v2/jobs/1/relaunch/\"}, \"summary_fields\": {\"organization\": {\"id\": 1, \"name\": \"Default\", \"description\": \"\"}, \"inventory\": {\"id\": 1, \"name\": \"Demo Inventory\", \"description\": \"\", \"has_active_failures\": true, \"total_hosts\": 3, \"hosts_with_active_failures\": 2, \"total_groups\": 0, \"has_inventory_sources\": false, \"total_inventory_sources\": 0, \"inventory_sources_with_failures\": 0, \"organization_id\": 1, \"kind\": \"\"}, \"execution_environment\": {\"id\": 2, \"name\": \"AWX EE (latest)\", \"description\": \"\", \"image\": \"quay.io/ansible/awx-ee:latest\"}, \"project\": {\"id\": 6, \"name\": \"Demo Project\", \"description\": \"\", \"status\": \"successful\", \"scm_type\": \"git\", \"allow_override\": false}, \"project_update\": {\"id\": 2, \"name\": \"Demo Project\", \"description\": \"\", \"status\": \"failed\", \"failed\": true}, \"job_template\": {\"id\": 7, \"name\": \"Demo Job Template\", \"description\": \"\"}, \"unified_job_template\": {\"id\": 7, \"name\": \"Demo Job Template\", \"description\": \"\", \"unified_job_type\": \"job\"}, \"instance_group\": {\"id\": 2, \"name\": \"default\", \"is_container_group\": true}, \"created_by\": {\"id\": 1, \"username\": \"admin\", \"first_name\": \"\", \"last_name\": \"\"}, \"user_capabilities\": {\"delete\": true, \"start\": true}, \"labels\": {\"count\": 0, \"results\": []}, \"credentials\": [{\"id\": 1, \"name\": \"Demo Credential\", \"description\": \"\", \"kind\": \"ssh\", \"cloud\": false}]}, \"created\": \"2024-10-29T20:05:00.601852Z\", \"modified\": \"2024-10-29T20:05:19.693197Z\", \"name\": \"Demo Job Template\", \"description\": \"\", \"unified_job_template\": 7, \"launch_type\": \"manual\", \"status\": \"error\", \"execution_environment\": 2, \"failed\": true, \"started\": \"2024-10-29T20:05:20.738778Z\", \"finished\": \"2024-10-29T20:05:53.607320Z\", \"canceled_on\": null, \"elapsed\": 32.869, \"job_explanation\": \"Previous Task Failed: {\\\"job_type\\\": \\\"project_update\\\", \\\"job_name\\\": \\\"Demo Project\\\", \\\"job_id\\\": \\\"2\\\"}\", \"execution_node\": \"\", \"controller_node\": \"awx-demo-task-55c9cf6ccc-8slzb\", \"launched_by\": {\"id\": 1, \"name\": \"admin\", \"type\": \"user\", \"url\": \"/api/v2/users/1/\"}, \"work_unit_id\": null, \"job_type\": \"run\", \"inventory\": 1, \"project\": 6, \"playbook\": \"hello_world.yml\", \"scm_branch\": \"\", \"forks\": 0, \"limit\": \"\", \"verbosity\": 0, \"extra_vars\": \"{}\", \"job_tags\": \"\", \"force_handlers\": false, \"skip_tags\": \"\", \"start_at_task\": \"\", \"timeout\": 0, \"use_fact_cache\": false, \"organization\": 1, \"job_template\": 7, \"passwords_needed_to_start\": [], \"allow_simultaneous\": false, \"artifacts\": {}, \"scm_revision\": \"\", \"instance_group\": 2, \"diff_mode\": false, \"job_slice_number\": 0, \"job_slice_count\": 1, \"webhook_service\": \"\", \"webhook_credential\": null, \"webhook_guid\": \"\"}, {\"id\": 3, \"type\": \"job\", \"url\": \"/api/v2/jobs/3/\", \"related\": {\"created_by\": \"/api/v2/users/1/\", \"labels\": \"/api/v2/jobs/3/labels/\", \"inventory\": \"/api/v2/inventories/1/\", \"project\": \"/api/v2/projects/6/\", \"organization\": \"/api/v2/organizations/1/\", \"credentials\": \"/api/v2/jobs/3/credentials/\", \"unified_job_template\": \"/api/v2/job_templates/7/\", \"stdout\": \"/api/v2/jobs/3/stdout/\", \"execution_environment\": \"/api/v2/execution_environments/2/\", \"job_events\": \"/api/v2/jobs/3/job_events/\", \"job_host_summaries\": \"/api/v2/jobs/3/job_host_summaries/\", \"activity_stream\": \"/api/v2/jobs/3/activity_stream/\", \"notifications\": \"/api/v2/jobs/3/notifications/\", \"create_schedule\": \"/api/v2/jobs/3/create_schedule/\", \"job_template\": \"/api/v2/job_templates/7/\", \"cancel\": \"/api/v2/jobs/3/cancel/\", \"project_update\": \"/api/v2/project_updates/4/\", \"relaunch\": \"/api/v2/jobs/3/relaunch/\"}, \"summary_fields\": {\"organization\": {\"id\": 1, \"name\": \"Default\", \"description\": \"\"}, \"inventory\": {\"id\": 1, \"name\": \"Demo Inventory\", \"description\": \"\", \"has_active_failures\": true, \"total_hosts\": 3, \"hosts_with_active_failures\": 2, \"total_groups\": 0, \"has_inventory_sources\": false, \"total_inventory_sources\": 0, \"inventory_sources_with_failures\": 0, \"organization_id\": 1, \"kind\": \"\"}, \"execution_environment\": {\"id\": 2, \"name\": \"AWX EE (latest)\", \"description\": \"\", \"image\": \"quay.io/ansible/awx-ee:latest\"}, \"project\": {\"id\": 6, \"name\": \"Demo Project\", \"description\": \"\", \"status\": \"successful\", \"scm_type\": \"git\", \"allow_override\": false}, \"project_update\": {\"id\": 4, \"name\": \"Demo Project\", \"description\": \"\", \"status\": \"successful\", \"failed\": false}, \"job_template\": {\"id\": 7, \"name\": \"Demo Job Template\", \"description\": \"\"}, \"unified_job_template\": {\"id\": 7, \"name\": \"Demo Job Template\", \"description\": \"\", \"unified_job_type\": \"job\"}, \"instance_group\": {\"id\": 2, \"name\": \"default\", \"is_container_group\": true}, \"created_by\": {\"id\": 1, \"username\": \"admin\", \"first_name\": \"\", \"last_name\": \"\"}, \"user_capabilities\": {\"delete\": true, \"start\": true}, \"labels\": {\"count\": 0, \"results\": []}, \"credentials\": [{\"id\": 1, \"name\": \"Demo Credential\", \"description\": \"\", \"kind\": \"ssh\", \"cloud\": false}]}, \"created\": \"2024-10-29T20:07:48.518612Z\", \"modified\": \"2024-10-29T20:07:50.312690Z\", \"name\": \"Demo Job Template\", \"description\": \"\", \"unified_job_template\": 7, \"launch_type\": \"manual\", \"status\": \"failed\", \"execution_environment\": 2, \"failed\": true, \"started\": \"2024-10-29T20:07:51.366859Z\", \"finished\": \"2024-10-29T20:11:50.355828Z\", \"canceled_on\": null, \"elapsed\": 238.989, \"job_explanation\": \"\", \"execution_node\": \"\", \"controller_node\": \"awx-demo-task-55c9cf6ccc-8slzb\", \"launched_by\": {\"id\": 1, \"name\": \"admin\", \"type\": \"user\", \"url\": \"/api/v2/users/1/\"}, \"work_unit_id\": \"cYeMz3Uy\", \"job_type\": \"run\", \"inventory\": 1, \"project\": 6, \"playbook\": \"hello_world.yml\", \"scm_branch\": \"\", \"forks\": 0, \"limit\": \"\", \"verbosity\": 0, \"extra_vars\": \"{}\", \"job_tags\": \"\", \"force_handlers\": false, \"skip_tags\": \"\", \"start_at_task\": \"\", \"timeout\": 0, \"use_fact_cache\": false, \"organization\": 1, \"job_template\": 7, \"passwords_needed_to_start\": [], \"allow_simultaneous\": false, \"artifacts\": {}, \"scm_revision\": \"xxxxyyyyzzzz\", \"instance_group\": 2, \"diff_mode\": false, \"job_slice_number\": 0, \"job_slice_count\": 1, \"webhook_service\": \"\", \"webhook_credential\": null, \"webhook_guid\": \"\"}]",
+  "inputs": {
+    "tower_last_updated": {
+      "id": 1005,
+      "name": "3 days"
+    },
+    "tower_job_status": null
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ansible-tower",
+    "package_version": "1.0.4",
+    "host": "my.app.host",
+    "execution_time_ms": 994,
+    "timestamp": "2024-10-30 13:22:04"
+  }
+}
