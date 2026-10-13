@@ -1,7 +1,8 @@
 # Data Feeder for ODBC Databases
 
 ## Release Notes
-* v1.2.2 (6/25) Fix for incident API field names in mixed case
+* v1.2.3 (10/26) Add extra reserved words in app.config
+* v1.2.2 (06/25) Fix for incident API field names in mixed case
 * v1.2.1 (12/24) Fix for race condition initializing PluginPool
 * v1.2.0 Support for incident timeseries data
 * v1.1.1 Refactored exclusion list logic
@@ -43,6 +44,8 @@ To use this capability, add the following app.config settings to the `[feeds]` c
 | :-- | :----- | :---------- |
 | timeseries | always \| onclose \| never | When to collect time-series data. Because of the extra API call needed to collect this data, it could be more impactful on SOAR when set to 'always'. default is 'never' |
 | timeseries_fields | owner_id, phase_id, severity_code, <custom_field> | A comma separated list of time-series fields to collect. Custom select and boolean fields are also possible. Specify wildcard fields with '?' or '*'. ex. ts_* will collect all time-series fields starting with "ts_". default is all time-series fields |
+
+A extra reserved words list can be added from the app.config to the existing RESERVE_LIST.
 
 ### Version 1.1.0 changes
 Version 1.1.0 introduces the ability to exclude incident fields from the created `incident` database table.  Wildcards can be used to remove fields following a pattern. Ex. gdpr*.
@@ -125,6 +128,9 @@ odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)
   pwd=<pwd>
   # new in v1.1.0 exclude incident fields 
   exclude_incident_fields_file = /path/to/exclusion_file.txt
+  # Extra reserved words to escape (comma-separated, lowercase). Use when a SOAR
+  # field name collides with a DB keyword not in the built-in list. Ex: file, key
+  # extra_reserved_words = file, key
 
   #[oracle_feed]
   #class=ODBCFeed
@@ -134,6 +140,9 @@ odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)
   #pwd=<pwd>
   # new in v1.1.0 exclude incident fields 
   #exclude_incident_fields_file = /path/to/exclusion_file.txt
+  # Extra reserved words to escape (comma-separated, lowercase). Use when a SOAR
+  # field name collides with a DB keyword not in the built-in list. Ex: file, key
+  # extra_reserved_words = file, key
 
   #[sqlserver_feed]
   #class=ODBCFeed
@@ -143,6 +152,9 @@ odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)
   #pwd=<pwd>
   # new in v1.1.0 exclude incident fields 
   # exclude_incident_fields_file = /path/to/exclusion_file.txt
+  # Extra reserved words to escape (comma-separated, lowercase). Use when a SOAR
+  # field name collides with a DB keyword not in the built-in list. Ex: file, key
+  # extra_reserved_words = file, key
 
   #[mysql_feed]
   #class=ODBCFeed
@@ -152,10 +164,16 @@ odbc_connect=<service_name> or (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<host>)
   #pwd=<pwd>
   # new in v1.1.0 exclude incident fields 
   # exclude_incident_fields_file = /path/to/exclusion_file.txt
+  # Extra reserved words to escape (comma-separated, lowercase). Use when a SOAR
+  # field name collides with a DB keyword not in the built-in list. Ex: file, key
+  # extra_reserved_words = file, key
 
   #[my_sqlite_feed]
   #class=SQLiteFeed
   #file_name=/tmp/feed.sqlite3
+  # Extra reserved words to escape (comma-separated, lowercase). Use when a SOAR
+  # field name collides with a DB keyword not in the built-in list. Ex: file, key
+  # extra_reserved_words = file, key
 ```
 
 ## ODBCFeed Class
@@ -277,7 +295,7 @@ CPReuse         =
 
 *	A custom field changed between Text and TextArea will have no effect in the Data Feed process.
 
-*	Python 2.7 with pyodbc 4.0.X will lose the millisecond precision on datetime fields. If this value is important to your environment, use Python 3.6.X or greater.
+*	Python 2.7 with pyodbc 4.0.X will lose the millisecond precision on datetime fields. If this value is important to your environment, use Python 3.11.X or greater.
 
 *	A custom field (or custom database column) deleted in Resilient and recreated as a different data type (for instance, a text field recreated as number) will break the feed process. It’s recommended one also delete the existing datastore table column so that it can be automatically recreated when resilient-circuits is restarted.
 

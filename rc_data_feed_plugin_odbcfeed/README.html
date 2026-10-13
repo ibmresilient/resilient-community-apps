@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="search" title="Search" href="../search.html"><link rel="next" title="Data Feeder for SOAR" href="../rc_data_feed_plugin_resilientfeed/README.html"><link rel="prev" title="Data Feed KafkaFeed Plugin" href="../rc_data_feed_plugin_kafkafeed/README.html">
+<link rel="search" title="Search" href="../search.html"><link rel="next" title="Data Feed Extension" href="../rc_data_feed/README.html"><link rel="prev" title="IBM Security QRadar SOAR Apps" href="../index.html">
         <link rel="prefetch" href="../_static/IBM_Security_Light.png" as="image">
         <link rel="prefetch" href="../_static/IBM_Security_Dark.png" as="image">
 
@@ -200,7 +200,8 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">New and Recently Updated Apps</span></p>
-<ul>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Data Feeder for ODBC Databases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rc_data_feed/README.html">Data Feed Extension</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_exchange_online/README.html">Microsoft Exchange Online</a></li>
@@ -213,14 +214,13 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../sc_email_parser/README.html">IBM SOAR Example Email Message Parsing Script</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_scheduler/README.html">Scheduler</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">App Development</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../docs/python_api.html">IBM SOAR Python Documentation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../fn_bitsight_cyber_insurance/README.html">BitSight Cyber Insurance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_algosec/README.html">AlgoSec</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB</a></li>
@@ -314,6 +314,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_rsa_netwitness/README.html">RSA NetWitness</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_salesforce/README.html">Salesforce</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_soar_utils/README.html">SOAR Function Utilities for SOAR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_scheduler/README.html">Scheduler</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_sentinelone/README.html">SentinelOne</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_sep/README.html">Symantec Endpoint Protection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_search_for_py2/README.html">Search for Python 2</a></li>
@@ -345,7 +346,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_zia/README.html">Zscaler Internet Access Functions for IBM SOAR</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_elasticfeed/README.html">Data Feed Elasticsearch Plugin</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_kafkafeed/README.html">Data Feed KafkaFeed Plugin</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Data Feeder for ODBC Databases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_resilientfeed/README.html">Data Feeder for SOAR</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rc_data_feed_plugin_splunkfeed/README.html">Data Feed plugin for Splunk</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rc-cts-abuseipdb/README.html">AbuseIPDB Threat Service</a></li>
@@ -394,7 +394,8 @@
 <section id="release-notes">
 <h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>v1.2.2 (6/25) Fix for incident API field names in mixed case</p></li>
+<li><p>v1.2.3 (10/26) Add extra reserved words in app.config</p></li>
+<li><p>v1.2.2 (06/25) Fix for incident API field names in mixed case</p></li>
 <li><p>v1.2.1 (12/24) Fix for race condition initializing PluginPool</p></li>
 <li><p>v1.2.0 Support for incident timeseries data</p></li>
 <li><p>v1.1.1 Refactored exclusion list logic</p></li>
@@ -455,6 +456,7 @@ For instance, how many seconds <code class="docutils literal notranslate"><span 
 </tbody>
 </table>
 </div>
+<p>A extra reserved words list can be added from the app.config to the existing RESERVE_LIST.</p>
 </section>
 <section id="version-1-1-0-changes">
 <h3>Version 1.1.0 changes<a class="headerlink" href="#version-1-1-0-changes" title="Link to this heading">¶</a></h3>
@@ -578,6 +580,9 @@ Complete the following steps to configure and run the integration:</p>
   <span class="n">pwd</span><span class="o">=&lt;</span><span class="n">pwd</span><span class="o">&gt;</span>
   <span class="c1"># new in v1.1.0 exclude incident fields </span>
   <span class="n">exclude_incident_fields_file</span> <span class="o">=</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">exclusion_file</span><span class="o">.</span><span class="n">txt</span>
+  <span class="c1"># Extra reserved words to escape (comma-separated, lowercase). Use when a SOAR</span>
+  <span class="c1"># field name collides with a DB keyword not in the built-in list. Ex: file, key</span>
+  <span class="c1"># extra_reserved_words = file, key</span>
 
   <span class="c1">#[oracle_feed]</span>
   <span class="c1">#class=ODBCFeed</span>
@@ -587,6 +592,9 @@ Complete the following steps to configure and run the integration:</p>
   <span class="c1">#pwd=&lt;pwd&gt;</span>
   <span class="c1"># new in v1.1.0 exclude incident fields </span>
   <span class="c1">#exclude_incident_fields_file = /path/to/exclusion_file.txt</span>
+  <span class="c1"># Extra reserved words to escape (comma-separated, lowercase). Use when a SOAR</span>
+  <span class="c1"># field name collides with a DB keyword not in the built-in list. Ex: file, key</span>
+  <span class="c1"># extra_reserved_words = file, key</span>
 
   <span class="c1">#[sqlserver_feed]</span>
   <span class="c1">#class=ODBCFeed</span>
@@ -596,6 +604,9 @@ Complete the following steps to configure and run the integration:</p>
   <span class="c1">#pwd=&lt;pwd&gt;</span>
   <span class="c1"># new in v1.1.0 exclude incident fields </span>
   <span class="c1"># exclude_incident_fields_file = /path/to/exclusion_file.txt</span>
+  <span class="c1"># Extra reserved words to escape (comma-separated, lowercase). Use when a SOAR</span>
+  <span class="c1"># field name collides with a DB keyword not in the built-in list. Ex: file, key</span>
+  <span class="c1"># extra_reserved_words = file, key</span>
 
   <span class="c1">#[mysql_feed]</span>
   <span class="c1">#class=ODBCFeed</span>
@@ -605,10 +616,16 @@ Complete the following steps to configure and run the integration:</p>
   <span class="c1">#pwd=&lt;pwd&gt;</span>
   <span class="c1"># new in v1.1.0 exclude incident fields </span>
   <span class="c1"># exclude_incident_fields_file = /path/to/exclusion_file.txt</span>
+  <span class="c1"># Extra reserved words to escape (comma-separated, lowercase). Use when a SOAR</span>
+  <span class="c1"># field name collides with a DB keyword not in the built-in list. Ex: file, key</span>
+  <span class="c1"># extra_reserved_words = file, key</span>
 
   <span class="c1">#[my_sqlite_feed]</span>
   <span class="c1">#class=SQLiteFeed</span>
   <span class="c1">#file_name=/tmp/feed.sqlite3</span>
+  <span class="c1"># Extra reserved words to escape (comma-separated, lowercase). Use when a SOAR</span>
+  <span class="c1"># field name collides with a DB keyword not in the built-in list. Ex: file, key</span>
+  <span class="c1"># extra_reserved_words = file, key</span>
 </pre></div>
 </div>
 </section>
@@ -807,7 +824,7 @@ file name as <code class="docutils literal notranslate"><span class="pre">tnsnam
 <li><p>Some databases have reserve words which cannot be used in tables (such as date and size). If a Resilient custom field is found to be in a database reserve list, the name (for example, the column name) is altered to include a trailing ‘_’.</p></li>
 <li><p>Deleting a custom field in Resilient will not remove it from the Data Feed datastore.</p></li>
 <li><p>A custom field changed between Text and TextArea will have no effect in the Data Feed process.</p></li>
-<li><p>Python 2.7 with pyodbc 4.0.X will lose the millisecond precision on datetime fields. If this value is important to your environment, use Python 3.6.X or greater.</p></li>
+<li><p>Python 2.7 with pyodbc 4.0.X will lose the millisecond precision on datetime fields. If this value is important to your environment, use Python 3.11.X or greater.</p></li>
 <li><p>A custom field (or custom database column) deleted in Resilient and recreated as a different data type (for instance, a text field recreated as number) will break the feed process. It’s recommended one also delete the existing datastore table column so that it can be automatically recreated when resilient-circuits is restarted.</p></li>
 <li><p>Renaming a custom datatable field’s api_name will create a new column in the database. The original field’s api_name column will remain.</p></li>
 <li><p>No foreign keys are created between tables. However, each table contains the <code class="docutils literal notranslate"><span class="pre">inc_id</span></code> column which can be used to link tables together. Below is a sample SQL query linking an incident with its tasks.</p></li>
@@ -900,23 +917,23 @@ file name as <code class="docutils literal notranslate"><span class="pre">tnsnam
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../rc_data_feed_plugin_resilientfeed/README.html">
+          <a class="next-page" href="../rc_data_feed/README.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Data Feeder for SOAR</div>
+                <div class="title">Data Feed Extension</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../rc_data_feed_plugin_kafkafeed/README.html">
+          <a class="prev-page" href="../index.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Data Feed KafkaFeed Plugin</div>
+                <div class="title">Home</div>
                 
               </div>
             </a>
