@@ -34,5 +34,4 @@ setup(
             "customize = rc_data_feed.util.customize:customization_data"
         ],
     },
-    tests_require=["pytest < 4.0.0", "pytest_resilient_circuits"],
 )

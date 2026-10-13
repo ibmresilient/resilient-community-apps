@@ -78,6 +78,7 @@ class TestDataFeederSyncIncidents:
     }
     expected_results_2 = {"success": True}
 
+    @pytest.mark.mock
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1),
         (mock_inputs_2, expected_results_2)
