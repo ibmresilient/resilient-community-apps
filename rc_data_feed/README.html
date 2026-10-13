@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="search" title="Search" href="../search.html"><link rel="next" title="IBM SOAR Python Documentation" href="../docs/python_api.html"><link rel="prev" title="Scheduler" href="../fn_scheduler/README.html">
+<link rel="search" title="Search" href="../search.html"><link rel="next" title="QRadar Enhanced Data Migration" href="../fn_qradar_enhanced_data/README.html"><link rel="prev" title="IBM Security QRadar SOAR Apps" href="../index.html">
         <link rel="prefetch" href="../_static/IBM_Security_Light.png" as="image">
         <link rel="prefetch" href="../_static/IBM_Security_Dark.png" as="image">
 
@@ -201,6 +201,7 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">New and Recently Updated Apps</span></p>
 <ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Data Feed Extension</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_exchange_online/README.html">Microsoft Exchange Online</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_timer/README.html">Timer Function</a></li>
@@ -213,7 +214,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../sc_email_parser/README.html">IBM SOAR Example Email Message Parsing Script</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_scheduler/README.html">Scheduler</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Data Feed Extension</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">App Development</span></p>
 <ul>
@@ -432,7 +432,7 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>3.3.3</p></td>
-<td><p>08/2026</p></td>
+<td><p>10/2026</p></td>
 <td><p>Updated to AppFunctionComponent. Added mock unit tests. Updated base Docker image for Python 3.11/3.12 support. Refreshed export.res to v51.0.8.0.</p></td>
 </tr>
 <tr class="row-odd"><td><p>3.3.2</p></td>
@@ -515,7 +515,7 @@
 <p>It performs reasonably well because after initial data population, all updates are performed by reading messages from message queues.</p>
 <p>There are opportunities for improvement however:</p>
 <ul class="simple">
-<li><p>The queue processing is single threaded and would likely benefit from having multiple processor threads.</p></li>
+<li><p>Plugin execution can be parallelized via <code class="docutils literal notranslate"><span class="pre">PluginPool</span></code>; set <code class="docutils literal notranslate"><span class="pre">parallel_execution</span> <span class="pre">=</span> <span class="pre">True</span></code> in the <code class="docutils literal notranslate"><span class="pre">[feeds]</span></code> section of <code class="docutils literal notranslate"><span class="pre">app.config</span></code> to enable it. The thread pool size is derived from <code class="docutils literal notranslate"><span class="pre">num_workers</span></code> in the <code class="docutils literal notranslate"><span class="pre">[resilient]</span></code> section (default: 25).</p></li>
 <li><p>Updates to SQL data feeds are currently done one at a time and may benefit from being done using “bulk” updates.</p></li>
 </ul>
 </section>
@@ -527,23 +527,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../docs/python_api.html">
+          <a class="next-page" href="../fn_qradar_enhanced_data/README.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">IBM SOAR Python Documentation</div>
+                <div class="title">QRadar Enhanced Data Migration</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../fn_scheduler/README.html">
+          <a class="prev-page" href="../index.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Scheduler</div>
+                <div class="title">Home</div>
                 
               </div>
             </a>

@@ -36,7 +36,7 @@ Newly added fields and data tables are created in the destination database (for 
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 3.3.3   | 08/2026 | Updated to AppFunctionComponent. Added mock unit tests. Updated base Docker image for Python 3.11/3.12 support. Refreshed export.res to v51.0.8.0. |
+| 3.3.3   | 10/2026 | Updated to AppFunctionComponent. Added mock unit tests. Updated base Docker image for Python 3.11/3.12 support. Refreshed export.res to v51.0.8.0. |
 | 3.3.2   | 06/2025 | Fix for incident fields with mixed-case API names |
 | 3.3.1   | 12/2024 | Fix for race condition with PluginPool |
 | 3.3.0   | 9/2024 | Support for incident time series data |
@@ -91,5 +91,5 @@ It performs reasonably well because after initial data population, all updates a
 
 There are opportunities for improvement however:
 
-* The queue processing is single threaded and would likely benefit from having multiple processor threads.
+* Plugin execution can be parallelized via `PluginPool`; set `parallel_execution = True` in the `[feeds]` section of `app.config` to enable it. The thread pool size is derived from `num_workers` in the `[resilient]` section (default: 25).
 * Updates to SQL data feeds are currently done one at a time and may benefit from being done using "bulk" updates.
